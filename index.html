@@ -16,36 +16,15 @@
       --bg-card: rgba(26, 34, 52, 0.55);
       --bg-card-hover: rgba(36, 48, 74, 0.75);
       --border-color: rgba(255, 255, 255, 0.08);
-      --border-hover: rgba(168, 85, 247, 0.4);
-      --accent-primary: #9146FF;
-      --accent-glow: rgba(145, 70, 255, 0.35);
-      --accent-secondary: #00F2FE;
+      --border-hover: rgba(0, 242, 254, 0.4);
+      --accent-primary: #00F2FE;
+      --accent-glow: rgba(0, 242, 254, 0.35);
+      --accent-secondary: #FF007A;
       --text-main: #F3F4F6;
       --text-muted: #9CA3AF;
       --radius-lg: 20px;
       --radius-md: 14px;
       --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    [data-theme="cyberpunk"] {
-      --accent-primary: #00F2FE;
-      --accent-glow: rgba(0, 242, 254, 0.35);
-      --accent-secondary: #FF007A;
-      --border-hover: rgba(0, 242, 254, 0.4);
-    }
-
-    [data-theme="youtube"] {
-      --accent-primary: #FF0000;
-      --accent-glow: rgba(255, 0, 0, 0.35);
-      --accent-secondary: #FF5252;
-      --border-hover: rgba(255, 0, 0, 0.4);
-    }
-
-    [data-theme="gold"] {
-      --accent-primary: #E6B800;
-      --accent-glow: rgba(230, 184, 0, 0.35);
-      --accent-secondary: #FF8C00;
-      --border-hover: rgba(230, 184, 0, 0.4);
     }
 
     * {
@@ -85,8 +64,8 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: radial-gradient(circle at 50% 0%, rgba(145, 70, 255, 0.12), transparent 70%),
-                  radial-gradient(circle at 80% 80%, rgba(0, 242, 254, 0.08), transparent 50%);
+      background: radial-gradient(circle at 50% 0%, rgba(0, 242, 254, 0.12), transparent 70%),
+                  radial-gradient(circle at 80% 80%, rgba(255, 0, 122, 0.08), transparent 50%);
       pointer-events: none;
       z-index: 0;
     }
@@ -99,134 +78,6 @@
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
-    }
-
-    .customizer-trigger {
-      position: fixed;
-      top: 1.25rem;
-      right: 1.25rem;
-      z-index: 100;
-      background: rgba(20, 26, 40, 0.8);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      backdrop-filter: blur(12px);
-      transition: var(--transition);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-
-    .customizer-trigger:hover {
-      border-color: var(--accent-primary);
-      transform: rotate(45deg) scale(1.05);
-      box-shadow: 0 0 15px var(--accent-glow);
-    }
-
-    .customizer-drawer {
-      position: fixed;
-      top: 0;
-      right: -360px;
-      width: 320px;
-      height: 100%;
-      background: rgba(15, 20, 32, 0.95);
-      backdrop-filter: blur(20px);
-      border-left: 1px solid var(--border-color);
-      z-index: 110;
-      padding: 2rem 1.5rem;
-      transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-    }
-
-    .customizer-drawer.open {
-      right: 0;
-    }
-
-    .drawer-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 1rem;
-    }
-
-    .drawer-header h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.2rem;
-    }
-
-    .close-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    .customizer-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .customizer-group label {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .theme-options {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.5rem;
-    }
-
-    .theme-btn {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      padding: 0.6rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: var(--transition);
-    }
-
-    .theme-btn:hover {
-      border-color: var(--accent-primary);
-    }
-
-    .color-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
-
-    .custom-input {
-      background: rgba(0,0,0,0.3);
-      border: 1px solid var(--border-color);
-      color: #fff;
-      padding: 0.6rem 0.8rem;
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 0.9rem;
-      outline: none;
-    }
-
-    .custom-input:focus {
-      border-color: var(--accent-primary);
     }
 
     .profile-card {
@@ -361,7 +212,7 @@
 
     .link-card:hover .icon-box {
       background: var(--accent-primary);
-      color: #fff;
+      color: #0B0E14;
       box-shadow: 0 0 15px var(--accent-glow);
     }
 
@@ -470,54 +321,10 @@
     }
   </style>
 </head>
-<body data-theme="twitch">
+<body data-theme="cyberpunk">
 
   <canvas id="particles-canvas"></canvas>
   <div class="bg-gradient-overlay"></div>
-
-  <button class="customizer-trigger" id="openDrawer" aria-label="Open Customizer">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-  </button>
-
-  <div class="customizer-drawer" id="drawer">
-    <div class="drawer-header">
-      <h3>Customizer</h3>
-      <button class="close-btn" id="closeDrawer">&times;</button>
-    </div>
-
-    <div class="customizer-group">
-      <label>Accent Theme</label>
-      <div class="theme-options">
-        <button class="theme-btn" onclick="setTheme('twitch')">
-          <span class="color-dot" style="background:#9146FF;"></span> Twitch
-        </button>
-        <button class="theme-btn" onclick="setTheme('cyberpunk')">
-          <span class="color-dot" style="background:#00F2FE;"></span> Cyber
-        </button>
-        <button class="theme-btn" onclick="setTheme('youtube')">
-          <span class="color-dot" style="background:#FF0000;"></span> Red
-        </button>
-        <button class="theme-btn" onclick="setTheme('gold')">
-          <span class="color-dot" style="background:#E6B800;"></span> Gold
-        </button>
-      </div>
-    </div>
-
-    <div class="customizer-group">
-      <label>Display Name</label>
-      <input type="text" id="inputName" class="custom-input" value="Grewdon_GG21">
-    </div>
-
-    <div class="customizer-group">
-      <label>Bio Text</label>
-      <textarea id="inputBio" class="custom-input" rows="3">Livestreamer & Content Creator. Welcome to the official links hub!</textarea>
-    </div>
-
-    <div class="customizer-group">
-      <label>Avatar Image URL</label>
-      <input type="text" id="inputAvatar" class="custom-input" value="https://instagram.fmkc1-1.fna.fbcdn.net/v/t51.2885-19/419592256_915324233546479_3572091680982987181_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=111&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy41NTYuQzMifQ%3D%3D&_nc_ohc=NyPzdz0walAQ7kNvwG3FcyH&_nc_oc=AdpI9F2dULNuQZSSnsZNbPx9MynYxSI0Zs2nbxXYgs1OT_PQHVDnv98LBDzyOVScsS7ik3HLuWzatYnbTdffEjG6&_nc_zt=24&_nc_ht=instagram.fmkc1-1.fna&_nc_ss=7b6a8&oh=00_AQPUjwrH_nKwPfW3reTV3Kv6tzHEbAP3FYTH447UAFLXhg&oe=6AE2177D">
-    </div>
-  </div>
 
   <main class="container">
 
@@ -571,7 +378,7 @@
       <div class="twitch-embed-card">
         <div class="embed-header">
           <div class="embed-title">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#9146FF"><path d="M11.571 1.429L1.429 4.286v15.714h5.714V22.5l2.857-2.857h3.571l7.143-7.143V1.429h-9.143zm7.714 9.714l-2.857 2.857h-4.286l-2.143 2.143v-2.143H6.429V5.714h12.856v5.429zM15 7.857h2.143v5.714H15V7.857zm-4.286 0h2.143v5.714h-2.143V7.857z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#00F2FE"><path d="M11.571 1.429L1.429 4.286v15.714h5.714V22.5l2.857-2.857h3.571l7.143-7.143V1.429h-9.143zm7.714 9.714l-2.857 2.857h-4.286l-2.143 2.143v-2.143H6.429V5.714h12.856v5.429zM15 7.857h2.143v5.714H15V7.857zm-4.286 0h2.143v5.714h-2.143V7.857z"/></svg>
             Twitch Stream
           </div>
         </div>
@@ -671,33 +478,6 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Drawer toggles
-    const drawer = document.getElementById('drawer');
-    document.getElementById('openDrawer').addEventListener('click', () => drawer.classList.add('open'));
-    document.getElementById('closeDrawer').addEventListener('click', () => drawer.classList.remove('open'));
-
-    // Customizer input handlers
-    const inputName = document.getElementById('inputName');
-    const inputBio = document.getElementById('inputBio');
-    const inputAvatar = document.getElementById('inputAvatar');
-
-    inputName.addEventListener('input', (e) => {
-      document.getElementById('display-name').textContent = e.target.value;
-      document.getElementById('display-handle').textContent = '@' + e.target.value;
-    });
-
-    inputBio.addEventListener('input', (e) => {
-      document.getElementById('display-bio').textContent = e.target.value;
-    });
-
-    inputAvatar.addEventListener('input', (e) => {
-      document.getElementById('profile-avatar').src = e.target.value;
-    });
-
-    function setTheme(theme) {
-      document.body.setAttribute('data-theme', theme);
-    }
-
     // Interactive Canvas Particles
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
@@ -728,7 +508,7 @@
       ctx.clearRect(0, 0, width, height);
 
       const computedStyle = getComputedStyle(document.body);
-      const accentColor = computedStyle.getPropertyValue('--accent-primary').trim() || '#9146FF';
+      const accentColor = computedStyle.getPropertyValue('--accent-primary').trim() || '#00F2FE';
 
       for (let i = 0; i < particles.length; i++) {
         let p = particles[i];
