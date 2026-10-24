@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Grewdon_GG21 | Links & Friends</title>
-  <meta name="description" content="Official link hub, stream page, and associates for Grewdon_GG21." />
+  <title>Grewdon_GG21 | Links</title>
+  <meta name="description" content="Official link hub and stream page for Grewdon_GG21." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
@@ -42,7 +42,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 4.5rem 1rem 2.5rem 1rem;
+      padding: 2.5rem 1rem;
       position: relative;
       overflow-x: hidden;
       line-height: 1.5;
@@ -70,45 +70,33 @@
       z-index: 0;
     }
 
-    /* Top Bar & Hamburger Button */
-    .top-header {
+    /* Navigation Sidebar */
+    .menu-trigger {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      top: 1.25rem;
+      left: 1.25rem;
       z-index: 100;
-      pointer-events: none;
-    }
-
-    .menu-toggle {
-      pointer-events: auto;
-      background: var(--bg-surface);
+      background: rgba(20, 26, 40, 0.8);
       border: 1px solid var(--border-color);
       color: var(--text-main);
-      border-radius: 12px;
       width: 44px;
       height: 44px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(12px);
       transition: var(--transition);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
 
-    .menu-toggle:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-hover);
-      color: var(--accent-primary);
+    .menu-trigger:hover {
+      border-color: var(--accent-primary);
       transform: scale(1.05);
+      box-shadow: 0 0 15px var(--accent-glow);
     }
 
-    /* Sidebar Drawer */
     .sidebar-overlay {
       position: fixed;
       top: 0;
@@ -117,109 +105,87 @@
       height: 100vh;
       background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(4px);
-      z-index: 1000;
+      z-index: 110;
       opacity: 0;
-      visibility: hidden;
-      transition: var(--transition);
+      pointer-events: none;
+      transition: opacity 0.3s ease;
     }
 
-    .sidebar-overlay.active {
+    .sidebar-overlay.open {
       opacity: 1;
-      visibility: visible;
+      pointer-events: auto;
     }
 
-    .sidebar-drawer {
+    .sidebar {
       position: fixed;
       top: 0;
-      left: 0;
-      width: 290px;
+      left: -300px;
+      width: 280px;
       height: 100%;
-      background: rgba(13, 18, 28, 0.92);
-      border-right: 1px solid var(--border-color);
+      background: rgba(15, 20, 32, 0.95);
       backdrop-filter: blur(20px);
-      z-index: 1001;
-      transform: translateX(-100%);
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      border-right: 1px solid var(--border-color);
+      z-index: 120;
+      padding: 2rem 1.5rem;
+      transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
-      padding: 1.5rem 1.25rem;
+      gap: 2rem;
+      box-shadow: 10px 0 30px rgba(0,0,0,0.5);
     }
 
-    .sidebar-drawer.active {
-      transform: translateX(0);
+    .sidebar.open {
+      left: 0;
     }
 
     .sidebar-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-bottom: 1.25rem;
       border-bottom: 1px solid var(--border-color);
-      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
     }
 
-    .sidebar-brand {
+    .sidebar-header h3 {
       font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.15rem;
-      color: #FFF;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+      font-size: 1.2rem;
     }
 
-    .sidebar-close {
-      background: transparent;
+    .close-btn {
+      background: none;
       border: none;
       color: var(--text-muted);
+      font-size: 1.5rem;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.4rem;
-      border-radius: 8px;
-      transition: var(--transition);
-    }
-
-    .sidebar-close:hover {
-      color: var(--text-main);
-      background: rgba(255, 255, 255, 0.08);
     }
 
     .sidebar-nav {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
 
     .nav-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 0.85rem;
-      padding: 0.85rem 1rem;
-      border-radius: var(--radius-md);
-      color: var(--text-muted);
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
+      gap: 0.75rem;
       transition: var(--transition);
-      border: 1px solid transparent;
       text-decoration: none;
     }
 
-    .nav-item:hover {
-      color: var(--text-main);
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .nav-item.active {
+    .nav-item:hover, .nav-item.active {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-primary);
       color: var(--accent-primary);
-      background: rgba(0, 242, 254, 0.08);
-      border-color: rgba(0, 242, 254, 0.25);
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
     }
 
-    /* Container & Dynamic Views */
     .container {
       width: 100%;
       max-width: 640px;
@@ -230,20 +196,15 @@
       gap: 1.5rem;
     }
 
-    .view-section {
+    .page-section {
       display: none;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
       flex-direction: column;
       gap: 1.5rem;
       width: 100%;
     }
 
-    .view-section.active {
+    .page-section.active {
       display: flex;
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .profile-card {
@@ -410,8 +371,7 @@
       transform: translateX(4px);
     }
 
-    /* Embed Cards */
-    .twitch-embed-card, .discord-embed-card {
+    .twitch-embed-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
@@ -460,30 +420,7 @@
       border: none;
     }
 
-    .discord-widget-container {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      overflow: hidden;
-      border-radius: var(--radius-md);
-    }
-
-    .discord-widget-container iframe {
-      width: 100%;
-      max-width: 100%;
-      height: 480px;
-      border: none;
-      background: transparent;
-    }
-
     /* Associates Cards */
-    .associates-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      width: 100%;
-    }
-
     .associate-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
@@ -491,118 +428,89 @@
       padding: 1.5rem;
       backdrop-filter: blur(16px);
       display: flex;
-      align-items: center;
-      gap: 1.2rem;
+      flex-direction: column;
+      gap: 1.25rem;
       transition: var(--transition);
     }
 
     .associate-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px -5px rgba(0,0,0,0.4);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .associate-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
 
     .associate-avatar {
-      width: 64px;
-      height: 64px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid var(--accent-primary);
+      background: var(--bg-card);
       flex-shrink: 0;
-      background-color: var(--bg-card);
     }
 
     .associate-info {
       display: flex;
       flex-direction: column;
-      flex-grow: 1;
     }
 
     .associate-name {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: #FFF;
     }
 
     .associate-role {
-      font-size: 0.82rem;
-      color: var(--accent-primary);
-      font-weight: 600;
-      margin-bottom: 0.2rem;
-    }
-
-    .associate-bio {
       font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-      margin-bottom: 0.6rem;
-    }
-
-    .associate-socials {
-      display: flex;
-      gap: 0.6rem;
-    }
-
-    .social-btn {
-      color: var(--text-muted);
-      padding: 0.35rem 0.65rem;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border-color);
-      font-size: 0.78rem;
-      text-decoration: none;
       font-weight: 600;
-      transition: var(--transition);
+    }
+
+    .associate-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .associate-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.5rem 0.9rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
+      gap: 0.4rem;
+      transition: var(--transition);
     }
 
-    .social-btn:hover {
-      background: var(--bg-card-hover);
-      color: #FFF;
-      border-color: rgba(255,255,255,0.2);
+    /* Custom Theme Overrides for Associates */
+    .theme-green {
+      --assoc-color: #00E676;
     }
+    .theme-green .associate-avatar { border: 2px solid var(--assoc-color); }
+    .theme-green .associate-role { color: var(--assoc-color); }
+    .theme-green .associate-btn:hover { border-color: var(--assoc-color); color: var(--assoc-color); background: rgba(0, 230, 118, 0.1); }
 
-    /* Custom Theme Accent Cards for Associates */
-    .associate-card.card-green {
-      border-color: rgba(0, 230, 118, 0.2);
+    .theme-red {
+      --assoc-color: #FF3366;
     }
-    .associate-card.card-green:hover {
-      border-color: #00E676;
-      box-shadow: 0 8px 25px -5px rgba(0, 230, 118, 0.35);
-    }
-    .associate-card.card-green .associate-avatar {
-      border-color: #00E676;
-    }
-    .associate-card.card-green .associate-role {
-      color: #00E676;
-    }
-    .associate-card.card-green .social-btn:hover {
-      border-color: #00E676;
-      color: #00E676;
-      background: rgba(0, 230, 118, 0.1);
-    }
+    .theme-red .associate-avatar { border: 2px solid var(--assoc-color); }
+    .theme-red .associate-role { color: var(--assoc-color); }
+    .theme-red .associate-btn:hover { border-color: var(--assoc-color); color: var(--assoc-color); background: rgba(255, 51, 102, 0.1); }
 
-    .associate-card.card-red {
-      border-color: rgba(255, 51, 102, 0.2);
+    .theme-cyan {
+      --assoc-color: #00F2FE;
     }
-    .associate-card.card-red:hover {
-      border-color: #FF3366;
-      box-shadow: 0 8px 25px -5px rgba(255, 51, 102, 0.35);
-    }
-    .associate-card.card-red .associate-avatar {
-      border-color: #FF3366;
-    }
-    .associate-card.card-red .associate-role {
-      color: #FF3366;
-    }
-    .associate-card.card-red .social-btn:hover {
-      border-color: #FF3366;
-      color: #FF3366;
-      background: rgba(255, 51, 102, 0.1);
-    }
+    .theme-cyan .associate-avatar { border: 2px solid var(--assoc-color); }
+    .theme-cyan .associate-role { color: var(--assoc-color); }
+    .theme-cyan .associate-btn:hover { border-color: var(--assoc-color); color: var(--assoc-color); background: rgba(0, 242, 254, 0.1); }
 
     footer {
       text-align: center;
@@ -618,7 +526,7 @@
 
     @media (max-width: 480px) {
       body {
-        padding: 4.2rem 0.8rem 1.5rem 0.8rem;
+        padding: 1.5rem 0.8rem;
       }
       .profile-card {
         padding: 1.8rem 1.2rem;
@@ -629,17 +537,6 @@
       .twitch-embed-card {
         padding: 1rem;
       }
-      .associate-card {
-        flex-direction: column;
-        text-align: center;
-        padding: 1.25rem;
-      }
-      .associate-info {
-        align-items: center;
-      }
-      .associate-socials {
-        justify-content: center;
-      }
     }
   </style>
 </head>
@@ -648,42 +545,35 @@
   <canvas id="particles-canvas"></canvas>
   <div class="bg-gradient-overlay"></div>
 
-  <!-- Header Navigation Controls -->
-  <header class="top-header">
-    <button class="menu-toggle" id="menu-btn" aria-label="Open Navigation Sidebar">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-    </button>
-  </header>
+  <!-- Sidebar Trigger -->
+  <button class="menu-trigger" id="openSidebar" aria-label="Open Navigation">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+  </button>
 
-  <!-- Sidebar Overlay & Sliding Drawer -->
-  <div class="sidebar-overlay" id="sidebar-overlay"></div>
-  <aside class="sidebar-drawer" id="sidebar-drawer">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-      <div class="sidebar-brand">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="var(--accent-primary)"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        Navigation
-      </div>
-      <button class="sidebar-close" id="sidebar-close-btn" aria-label="Close Sidebar">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
+      <h3>Navigation</h3>
+      <button class="close-btn" id="closeSidebar">&times;</button>
     </div>
     <nav class="sidebar-nav">
-      <a class="nav-item active" data-target="links-view">
+      <button class="nav-item active" onclick="switchPage('links')">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-        Links
-      </a>
-      <a class="nav-item" data-target="associates-view">
+        Links & Stream
+      </button>
+      <button class="nav-item" onclick="switchPage('associates')">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-        Featured Friends
-      </a>
+        Associates
+      </button>
     </nav>
   </aside>
 
   <main class="container">
 
-    <!-- VIEW 1: LINKS & STREAM -->
-    <section id="links-view" class="view-section active">
-      <div class="profile-card">
+    <!-- PAGE 1: LINKS & STREAM -->
+    <div id="page-links" class="page-section active">
+      <section class="profile-card">
         <div class="avatar-wrapper">
           <img id="profile-avatar" class="avatar-img" src="https://instagram.fmkc1-1.fna.fbcdn.net/v/t51.2885-19/419592256_915324233546479_3572091680982987181_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=111&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy41NTYuQzMifQ%3D%3D&_nc_ohc=NyPzdz0walAQ7kNvwG3FcyH&_nc_oc=AdpI9F2dULNuQZSSnsZNbPx9MynYxSI0Zs2nbxXYgs1OT_PQHVDnv98LBDzyOVScsS7ik3HLuWzatYnbTdffEjG6&_nc_zt=24&_nc_ht=instagram.fmkc1-1.fna&_nc_ss=7b6a8&oh=00_AQPUjwrH_nKwPfW3reTV3Kv6tzHEbAP3FYTH447UAFLXhg&oe=6AE2177D" alt="Grewdon_GG21 Avatar" onError="this.onerror=null;this.src='https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=400&q=80';">
         </div>
@@ -693,7 +583,7 @@
           <span class="profile-handle" id="display-handle">@Grewdon_GG21</span>
           <p class="profile-bio" id="display-bio">Livestreamer & Content Creator. Welcome to the official links hub!</p>
         </div>
-      </div>
+      </section>
 
       <div class="links-list">
 
@@ -790,7 +680,7 @@
           </div>
         </a>
 
-        <!-- 7. Speedrun.com -->
+        <!-- 7. Speedrun.com (Bottom) -->
         <a href="https://speedrun.com/user/grewdon_gg21" target="_blank" rel="noopener noreferrer" class="link-card">
           <div class="link-left">
             <div class="icon-box" style="color: #FFD700;">
@@ -807,58 +697,60 @@
         </a>
 
       </div>
-    </section>
+    </div>
 
-    <!-- VIEW 2: FRIENDS -->
-    <section id="associates-view" class="view-section">
-      <div class="profile-card" style="padding: 1.8rem 1.5rem;">
-        <h2 class="profile-name" style="font-size: 1.6rem;">Friends</h2>
-        <p class="profile-bio" style="margin-top: 0.2rem;">Featured creators.</p>
-      </div>
+    <!-- PAGE 2: ASSOCIATES -->
+    <div id="page-associates" class="page-section">
+      <section class="profile-card" style="padding: 1.5rem; text-align: left; align-items: flex-start;">
+        <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: #fff;">Featured Friends</h2>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">Creators, streamers, and friends in the community.</p>
+      </section>
 
-      <div class="associates-grid">
-        <!-- Associate Item 1: LuigiTime202 (Green Theme) -->
-        <div class="associate-card card-green">
-          <img class="associate-avatar" src="https://mkwiiki.org/w/images/0/0e/LuigiTime202%27s_Profile_Picture.png" alt="LuigiTime202 Avatar" onError="this.onerror=null;this.src='https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=250&q=80';">
+      <!-- Associate 1: LuigiTime202 (Green Theme) -->
+      <div class="associate-card theme-green">
+        <div class="associate-header">
+          <img src="https://mkwiiki.org/w/images/0/0e/LuigiTime202%27s_Profile_Picture.png" alt="LuigiTime202" class="associate-avatar" onError="this.onerror=null;this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=150&q=80';">
           <div class="associate-info">
-            <h3 class="associate-name">LuigiTime202</h3>
-            <span class="associate-role">Mario Kart Wii Modder & Streamer</span>
-            <p class="associate-bio">Creates mods for Mario Kart Wii and livestreams.</p>
-            <div class="associate-socials">
-              <a href="https://www.youtube.com/@luigitime202" target="_blank" rel="noopener noreferrer" class="social-btn">YouTube</a>
-              <a href="https://www.twitch.tv/luigitime202" target="_blank" rel="noopener noreferrer" class="social-btn">Twitch</a>
-              <a href="https://mkwiiki.org/wiki/User:LuigiTime202" target="_blank" rel="noopener noreferrer" class="social-btn">MKWii Wiki</a>
-            </div>
+            <span class="associate-name">LuigiTime202</span>
+            <span class="associate-role">Content Creator & MKWii Modder</span>
           </div>
         </div>
+        <div class="associate-links">
+          <a href="https://www.youtube.com/@luigitime202" target="_blank" rel="noopener noreferrer" class="associate-btn">YouTube</a>
+          <a href="https://www.twitch.tv/luigitime202" target="_blank" rel="noopener noreferrer" class="associate-btn">Twitch</a>
+          <a href="https://mkwiiki.org/wiki/User:LuigiTime202" target="_blank" rel="noopener noreferrer" class="associate-btn">MKWii Wiki</a>
+        </div>
+      </div>
 
-        <!-- Associate Item 2: EeveeDrop (Red Theme) -->
-        <div class="associate-card card-red">
-          <img class="associate-avatar" src="https://instagram.fmkc1-1.fna.fbcdn.net/v/t51.82787-19/670386465_18160466347429203_1375711201767667144_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=101&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=cHtROGR33HsQ7kNvwEn2rTx&_nc_oc=AdrgRIOi2YR1X8Kkuroytq2eiTl-e_GAbtVkLM6m7ywvsLWXrjdk08JFKrKl70GODNJK86igTsOAWw9Q2tfIyk0-&_nc_zt=24&_nc_ht=instagram.fmkc1-1.fna&_nc_gid=OnJvVHuQr6rB0pHCGYDeLg&_nc_ss=7b6a8&oh=00_AQNBHSjaexod7biUoO7rneUvdqxNsraDj61gov9DsbRuIg&oe=6AE2DAE3" alt="Eeveedrop1234 Avatar" onError="this.onerror=null;this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80';">
+      <!-- Associate 2: EeveeDrop (Red Theme) -->
+      <div class="associate-card theme-red">
+        <div class="associate-header">
+          <img src="https://instagram.fmkc1-1.fna.fbcdn.net/v/t51.82787-19/670386465_18160466347429203_1375711201767667144_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=101&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=cHtROGR33HsQ7kNvwEn2rTx&_nc_oc=AdrgRIOi2YR1X8Kkuroytq2eiTl-e_GAbtVkLM6m7ywvsLWXrjdk08JFKrKl70GODNJK86igTsOAWw9Q2tfIyk0-&_nc_zt=24&_nc_ht=instagram.fmkc1-1.fna&_nc_gid=OnJvVHuQr6rB0pHCGYDeLg&_nc_ss=7b6a8&oh=00_AQNBHSjaexod7biUoO7rneUvdqxNsraDj61gov9DsbRuIg&oe=6AE2DAE3" alt="Eeveedrop1234" class="associate-avatar" onError="this.onerror=null;this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=150&q=80';">
           <div class="associate-info">
-            <h3 class="associate-name">EeveeDrop</h3>
+            <span class="associate-name">EeveeDrop</span>
             <span class="associate-role">Artist</span>
-            <p class="associate-bio">Close friend and artist that drew my profile picture</p>
-            <div class="associate-socials">
-              <a href="https://linktr.ee/EeveeDrop" target="_blank" rel="noopener noreferrer" class="social-btn">Linktree</a>
-            </div>
           </div>
         </div>
-
-        <!-- Associate Item 3: VasserDrachen -->
-        <div class="associate-card">
-          <img class="associate-avatar" src="https://yt3.googleusercontent.com/43jZ2T3o7-q8Keeu06gxUMOm6mrI73PZN2zFYwESAwlgBufEZVmJjg2s9aqC4FXlHRZDGWc9yb8=s160-c-k-c0x00ffffff-no-rj" alt="VasserDrachen Avatar" onError="this.onerror=null;this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80';">
-          <div class="associate-info">
-            <h3 class="associate-name">VasserDrachen</h3>
-            <span class="associate-role">SSBU & Pokkén Tournament Player / Music Artist</span>
-            <p class="associate-bio">Competitive Super Smash Bros. Ultimate & Pokkén Tournament competitor and music creator.</p>
-            <div class="associate-socials">
-              <a href="https://www.youtube.com/@vasserdrachen" target="_blank" rel="noopener noreferrer" class="social-btn">YouTube</a>
-            </div>
-          </div>
+        <div class="associate-links">
+          <a href="https://linktr.ee/EeveeDrop" target="_blank" rel="noopener noreferrer" class="associate-btn">Linktree</a>
         </div>
       </div>
-    </section>
+
+      <!-- Associate 3: VasserDrachen (Cyan Theme) -->
+      <div class="associate-card theme-cyan">
+        <div class="associate-header">
+          <img src="https://yt3.googleusercontent.com/43jZ2T3o7-q8Keeu06gxUMOm6mrI73PZN2zFYwESAwlgBufEZVmJjg2s9aqC4FXlHRZDGWc9yb8=s160-c-k-c0x00ffffff-no-rj" alt="VasserDrachen" class="associate-avatar" onError="this.onerror=null;this.src='https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=150&q=80';">
+          <div class="associate-info">
+            <span class="associate-name">VasserDrachen</span>
+            <span class="associate-role">SSBU & Pokkén Player • Music Artist</span>
+          </div>
+        </div>
+        <div class="associate-links">
+          <a href="https://www.youtube.com/@vasserdrachen" target="_blank" rel="noopener noreferrer" class="associate-btn">YouTube</a>
+        </div>
+      </div>
+
+    </div>
 
     <footer>
       <p>Grewdon_GG21 • Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
@@ -869,48 +761,42 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Sidebar & SPA Page Toggle Logic
-    const menuBtn = document.getElementById('menu-btn');
-    const closeBtn = document.getElementById('sidebar-close-btn');
-    const drawer = document.getElementById('sidebar-drawer');
-    const overlay = document.getElementById('sidebar-overlay');
-    const navItems = document.querySelectorAll('.nav-item');
-    const viewSections = document.querySelectorAll('.view-section');
-
-    function openSidebar() {
-      drawer.classList.add('active');
-      overlay.classList.add('active');
+    // Sidebar Toggles
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    
+    function toggleSidebar(open) {
+      if (open) {
+        sidebar.classList.add('open');
+        sidebarOverlay.classList.add('open');
+      } else {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('open');
+      }
     }
 
-    function closeSidebar() {
-      drawer.classList.remove('active');
-      overlay.classList.remove('active');
+    document.getElementById('openSidebar').addEventListener('click', () => toggleSidebar(true));
+    document.getElementById('closeSidebar').addEventListener('click', () => toggleSidebar(false));
+    sidebarOverlay.addEventListener('click', () => toggleSidebar(false));
+
+    // Page Switching Logic
+    function switchPage(pageId) {
+      document.querySelectorAll('.page-section').forEach(page => page.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+
+      if (pageId === 'links') {
+        document.getElementById('page-links').classList.add('active');
+        document.querySelectorAll('.nav-item')[0].classList.add('active');
+      } else if (pageId === 'associates') {
+        document.getElementById('page-associates').classList.add('active');
+        document.querySelectorAll('.nav-item')[1].classList.add('active');
+      }
+
+      toggleSidebar(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    menuBtn.addEventListener('click', openSidebar);
-    closeBtn.addEventListener('click', closeSidebar);
-    overlay.addEventListener('click', closeSidebar);
-
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const targetId = item.getAttribute('data-target');
-
-        navItems.forEach(nav => nav.classList.remove('active'));
-        item.classList.add('active');
-
-        viewSections.forEach(section => {
-          if (section.id === targetId) {
-            section.classList.add('active');
-          } else {
-            section.classList.remove('active');
-          }
-        });
-
-        closeSidebar();
-      });
-    });
-
-    // Background Particles
+    // Interactive Canvas Particles
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
 
