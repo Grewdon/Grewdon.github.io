@@ -753,13 +753,17 @@
     </div>
 
     <footer>
-      <p>Grewdon_GG21 • Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
+      <p>© <span id="year"></span> Grewdon_GG21 • Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
     </footer>
 
   </main>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Dynamic Year Element Safe Handling
+    const yearElem = document.getElementById('year');
+    if (yearElem) {
+      yearElem.textContent = new Date().getFullYear();
+    }
 
     // Sidebar Toggles
     const sidebar = document.getElementById('sidebar');
@@ -798,73 +802,75 @@
 
     // Interactive Canvas Particles
     const canvas = document.getElementById('particles-canvas');
-    const ctx = canvas.getContext('2d');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
 
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
 
-    window.addEventListener('resize', () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    });
-
-    const particles = [];
-    const particleCount = Math.min(Math.floor(width / 25), 45);
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
-        alpha: Math.random() * 0.5 + 0.2
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
       });
-    }
 
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
+      const particles = [];
+      const particleCount = Math.min(Math.floor(width / 25), 45);
 
-      const computedStyle = getComputedStyle(document.body);
-      const accentColor = computedStyle.getPropertyValue('--accent-primary').trim() || '#00F2FE';
-
-      for (let i = 0; i < particles.length; i++) {
-        let p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
-        if (p.y < 0) p.y = height;
-        if (p.y > height) p.y = 0;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = accentColor;
-        ctx.globalAlpha = p.alpha;
-        ctx.fill();
-
-        for (let j = i + 1; j < particles.length; j++) {
-          let p2 = particles[j];
-          let dx = p.x - p2.x;
-          let dy = p.y - p2.y;
-          let dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = accentColor;
-            ctx.globalAlpha = (1 - dist / 120) * 0.15;
-            ctx.stroke();
-          }
-        }
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          size: Math.random() * 2 + 1,
+          alpha: Math.random() * 0.5 + 0.2
+        });
       }
 
-      requestAnimationFrame(animate);
-    }
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
 
-    animate();
+        const computedStyle = getComputedStyle(document.body);
+        const accentColor = computedStyle.getPropertyValue('--accent-primary').trim() || '#00F2FE';
+
+        for (let i = 0; i < particles.length; i++) {
+          let p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = accentColor;
+          ctx.globalAlpha = p.alpha;
+          ctx.fill();
+
+          for (let j = i + 1; j < particles.length; j++) {
+            let p2 = particles[j];
+            let dx = p.x - p2.x;
+            let dy = p.y - p2.y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 120) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = accentColor;
+              ctx.globalAlpha = (1 - dist / 120) * 0.15;
+              ctx.stroke();
+            }
+          }
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
   </script>
 </body>
 </html>
