@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Grewdon_GG21 | Main Page</title>
-  <meta name="description" content="Official page for Grewdon_GG21." />
+  <title>Grewdon_GG21 | Links & Associates</title>
+  <meta name="description" content="Official link hub, stream page, and associates for Grewdon_GG21." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
@@ -42,7 +42,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 2.5rem 1rem;
+      padding: 4.5rem 1rem 2.5rem 1rem;
       position: relative;
       overflow-x: hidden;
       line-height: 1.5;
@@ -70,6 +70,156 @@
       z-index: 0;
     }
 
+    /* Top Bar & Hamburger Button */
+    .top-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .menu-toggle {
+      pointer-events: auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: 12px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(16px);
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .menu-toggle:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      color: var(--accent-primary);
+      transform: scale(1.05);
+    }
+
+    /* Sidebar Drawer */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .sidebar-drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 290px;
+      height: 100%;
+      background: rgba(13, 18, 28, 0.92);
+      border-right: 1px solid var(--border-color);
+      backdrop-filter: blur(20px);
+      z-index: 1001;
+      transform: translateX(-100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 1.25rem;
+    }
+
+    .sidebar-drawer.active {
+      transform: translateX(0);
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .sidebar-brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .sidebar-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.4rem;
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+
+    .sidebar-close:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius-md);
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+
+    .nav-item:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-item.active {
+      color: var(--accent-primary);
+      background: rgba(0, 242, 254, 0.08);
+      border-color: rgba(0, 242, 254, 0.25);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+    }
+
+    /* Container & Dynamic Views */
     .container {
       width: 100%;
       max-width: 640px;
@@ -78,6 +228,22 @@
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+    }
+
+    .view-section {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .view-section.active {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .profile-card {
@@ -244,6 +410,7 @@
       transform: translateX(4px);
     }
 
+    /* Embed Cards */
     .twitch-embed-card, .discord-embed-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
@@ -309,6 +476,134 @@
       background: transparent;
     }
 
+    /* Associates Cards */
+    .associates-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .associate-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .associate-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px -5px rgba(0,0,0,0.4);
+    }
+
+    .associate-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent-primary);
+      flex-shrink: 0;
+      background-color: var(--bg-card);
+    }
+
+    .associate-info {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .associate-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .associate-role {
+      font-size: 0.82rem;
+      color: var(--accent-primary);
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .associate-bio {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 0.6rem;
+    }
+
+    .associate-socials {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .social-btn {
+      color: var(--text-muted);
+      padding: 0.35rem 0.65rem;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-color);
+      font-size: 0.78rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .social-btn:hover {
+      background: var(--bg-card-hover);
+      color: #FFF;
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    /* Custom Theme Accent Cards for Associates */
+    .associate-card.card-green {
+      border-color: rgba(0, 230, 118, 0.2);
+    }
+    .associate-card.card-green:hover {
+      border-color: #00E676;
+      box-shadow: 0 8px 25px -5px rgba(0, 230, 118, 0.35);
+    }
+    .associate-card.card-green .associate-avatar {
+      border-color: #00E676;
+    }
+    .associate-card.card-green .associate-role {
+      color: #00E676;
+    }
+    .associate-card.card-green .social-btn:hover {
+      border-color: #00E676;
+      color: #00E676;
+      background: rgba(0, 230, 118, 0.1);
+    }
+
+    .associate-card.card-red {
+      border-color: rgba(255, 51, 102, 0.2);
+    }
+    .associate-card.card-red:hover {
+      border-color: #FF3366;
+      box-shadow: 0 8px 25px -5px rgba(255, 51, 102, 0.35);
+    }
+    .associate-card.card-red .associate-avatar {
+      border-color: #FF3366;
+    }
+    .associate-card.card-red .associate-role {
+      color: #FF3366;
+    }
+    .associate-card.card-red .social-btn:hover {
+      border-color: #FF3366;
+      color: #FF3366;
+      background: rgba(255, 51, 102, 0.1);
+    }
+
     footer {
       text-align: center;
       font-size: 0.85rem;
@@ -323,7 +618,7 @@
 
     @media (max-width: 480px) {
       body {
-        padding: 1.5rem 0.8rem;
+        padding: 4.2rem 0.8rem 1.5rem 0.8rem;
       }
       .profile-card {
         padding: 1.8rem 1.2rem;
@@ -334,6 +629,17 @@
       .twitch-embed-card, .discord-embed-card {
         padding: 1rem;
       }
+      .associate-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.25rem;
+      }
+      .associate-info {
+        align-items: center;
+      }
+      .associate-socials {
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -342,145 +648,230 @@
   <canvas id="particles-canvas"></canvas>
   <div class="bg-gradient-overlay"></div>
 
+  <!-- Header Navigation Controls -->
+  <header class="top-header">
+    <button class="menu-toggle" id="menu-btn" aria-label="Open Navigation Sidebar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+  </header>
+
+  <!-- Sidebar Overlay & Sliding Drawer -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+  <aside class="sidebar-drawer" id="sidebar-drawer">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="var(--accent-primary)"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        Navigation
+      </div>
+      <button class="sidebar-close" id="sidebar-close-btn" aria-label="Close Sidebar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item active" data-target="links-view">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+        Links & Stream
+      </a>
+      <a class="nav-item" data-target="associates-view">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        Associates & Partners
+      </a>
+    </nav>
+  </aside>
+
   <main class="container">
 
-    <section class="profile-card">
-      <div class="avatar-wrapper">
-        <img id="profile-avatar" class="avatar-img" src="https://instagram.fmkc1-1.fna.fbcdn.net/v/t51.2885-19/419592256_915324233546479_3572091680982987181_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=111&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy41NTYuQzMifQ%3D%3D&_nc_ohc=NyPzdz0walAQ7kNvwG3FcyH&_nc_oc=AdpI9F2dULNuQZSSnsZNbPx9MynYxSI0Zs2nbxXYgs1OT_PQHVDnv98LBDzyOVScsS7ik3HLuWzatYnbTdffEjG6&_nc_zt=24&_nc_ht=instagram.fmkc1-1.fna&_nc_ss=7b6a8&oh=00_AQPUjwrH_nKwPfW3reTV3Kv6tzHEbAP3FYTH447UAFLXhg&oe=6AE2177D" alt="Grewdon_GG21 Avatar" onError="this.onerror=null;this.src='https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=400&q=80';">
+    <!-- VIEW 1: LINKS & STREAM -->
+    <section id="links-view" class="view-section active">
+      <div class="profile-card">
+        <div class="avatar-wrapper">
+          <img id="profile-avatar" class="avatar-img" src="https://instagram.fmkc1-1.fna.fbcdn.net/v/t51.2885-19/419592256_915324233546479_3572091680982987181_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=111&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy41NTYuQzMifQ%3D%3D&_nc_ohc=NyPzdz0walAQ7kNvwG3FcyH&_nc_oc=AdpI9F2dULNuQZSSnsZNbPx9MynYxSI0Zs2nbxXYgs1OT_PQHVDnv98LBDzyOVScsS7ik3HLuWzatYnbTdffEjG6&_nc_zt=24&_nc_ht=instagram.fmkc1-1.fna&_nc_ss=7b6a8&oh=00_AQPUjwrH_nKwPfW3reTV3Kv6tzHEbAP3FYTH447UAFLXhg&oe=6AE2177D" alt="Grewdon_GG21 Avatar" onError="this.onerror=null;this.src='https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=400&q=80';">
+        </div>
+        
+        <div class="profile-info">
+          <h1 class="profile-name" id="display-name">Grewdon_GG21</h1>
+          <span class="profile-handle" id="display-handle">@Grewdon_GG21</span>
+          <p class="profile-bio" id="display-bio">Livestreamer & Content Creator. Welcome to the official links hub!</p>
+        </div>
       </div>
-      
-      <div class="profile-info">
-        <h1 class="profile-name" id="display-name">Grewdon_GG21</h1>
-        <span class="profile-handle" id="display-handle">@Grewdon_GG21</span>
-        <p class="profile-bio" id="display-bio">Livestreamer & Content Creator</p>
+
+      <div class="links-list">
+
+        <!-- 1. YouTube -->
+        <a href="https://youtube.com/@Grewdon_GG21" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="link-left">
+            <div class="icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </div>
+            <div class="link-details">
+              <span class="link-title">YouTube</span>
+              <span class="link-subtitle">Subscribe for videos & highlights</span>
+            </div>
+          </div>
+          <div class="link-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- 2. Twitch Card -->
+        <a href="https://twitch.tv/grewdon_gg21" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="link-left">
+            <div class="icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 1.429L1.429 4.286v15.714h5.714V22.5l2.857-2.857h3.571l7.143-7.143V1.429h-9.143zm7.714 9.714l-2.857 2.857h-4.286l-2.143 2.143v-2.143H6.429V5.714h12.856v5.429zM15 7.857h2.143v5.714H15V7.857zm-4.286 0h2.143v5.714h-2.143V7.857z"/></svg>
+            </div>
+            <div class="link-details">
+              <span class="link-title">Twitch</span>
+              <span class="link-subtitle">Watch livestreams & chat</span>
+            </div>
+          </div>
+          <div class="link-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- 3. Twitch Embed Card -->
+        <div class="twitch-embed-card">
+          <div class="embed-header">
+            <div class="embed-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#00F2FE"><path d="M11.571 1.429L1.429 4.286v15.714h5.714V22.5l2.857-2.857h3.571l7.143-7.143V1.429h-9.143zm7.714 9.714l-2.857 2.857h-4.286l-2.143 2.143v-2.143H6.429V5.714h12.856v5.429zM15 7.857h2.143v5.714H15V7.857zm-4.286 0h2.143v5.714h-2.143V7.857z"/></svg>
+              Twitch Stream
+            </div>
+          </div>
+          <div class="embed-container">
+            <iframe src="https://player.twitch.tv/?channel=grewdon_gg21&parent=grewdon.github.io" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+          </div>
+        </div>
+
+        <!-- 4. Discord Link Card -->
+        <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="link-left">
+            <div class="icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+            </div>
+            <div class="link-details">
+              <span class="link-title">Discord Server</span>
+              <span class="link-subtitle">Join the GG21 community</span>
+            </div>
+          </div>
+          <div class="link-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- 5. Discord Widget Embed Card -->
+        <div class="discord-embed-card">
+          <div class="embed-header">
+            <div class="embed-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#00F2FE"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+              Discord Community
+            </div>
+          </div>
+          <div class="discord-widget-container">
+            <iframe src="https://discord.com/widget?id=632696843373117493&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+          </div>
+        </div>
+
+        <!-- 6. Twitter / X -->
+        <a href="https://x.com/Grewdon_GG21" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="link-left">
+            <div class="icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </div>
+            <div class="link-details">
+              <span class="link-title">Twitter / X</span>
+              <span class="link-subtitle">@Grewdon_GG21 updates</span>
+            </div>
+          </div>
+          <div class="link-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- 7. GitHub -->
+        <a href="https://github.com/Grewdon" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="link-left">
+            <div class="icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </div>
+            <div class="link-details">
+              <span class="link-title">GitHub</span>
+              <span class="link-subtitle">Projects & source code</span>
+            </div>
+          </div>
+          <div class="link-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- 8. Speedrun.com -->
+        <a href="https://speedrun.com/user/grewdon_gg21" target="_blank" rel="noopener noreferrer" class="link-card">
+          <div class="link-left">
+            <div class="icon-box" style="color: #FFD700;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>
+            </div>
+            <div class="link-details">
+              <span class="link-title">Speedrun.com</span>
+              <span class="link-subtitle">Profile & leaderboards</span>
+            </div>
+          </div>
+          <div class="link-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
       </div>
     </section>
 
-    <div class="links-list">
-
-      <!-- 1. YouTube -->
-      <a href="https://youtube.com/@Grewdon_GG21" target="_blank" rel="noopener noreferrer" class="link-card">
-        <div class="link-left">
-          <div class="icon-box">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-          </div>
-          <div class="link-details">
-            <span class="link-title">YouTube</span>
-            <span class="link-subtitle">Subscribe for videos & highlights</span>
-          </div>
-        </div>
-        <div class="link-arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-      </a>
-
-      <!-- 2. Twitch Card -->
-      <a href="https://twitch.tv/grewdon_gg21" target="_blank" rel="noopener noreferrer" class="link-card">
-        <div class="link-left">
-          <div class="icon-box">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 1.429L1.429 4.286v15.714h5.714V22.5l2.857-2.857h3.571l7.143-7.143V1.429h-9.143zm7.714 9.714l-2.857 2.857h-4.286l-2.143 2.143v-2.143H6.429V5.714h12.856v5.429zM15 7.857h2.143v5.714H15V7.857zm-4.286 0h2.143v5.714h-2.143V7.857z"/></svg>
-          </div>
-          <div class="link-details">
-            <span class="link-title">Twitch</span>
-            <span class="link-subtitle">Watch livestreams & chat</span>
-          </div>
-        </div>
-        <div class="link-arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-      </a>
-
-      <!-- 3. Twitch Embed Card -->
-      <div class="twitch-embed-card">
-        <div class="embed-header">
-          <div class="embed-title">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#00F2FE"><path d="M11.571 1.429L1.429 4.286v15.714h5.714V22.5l2.857-2.857h3.571l7.143-7.143V1.429h-9.143zm7.714 9.714l-2.857 2.857h-4.286l-2.143 2.143v-2.143H6.429V5.714h12.856v5.429zM15 7.857h2.143v5.714H15V7.857zm-4.286 0h2.143v5.714h-2.143V7.857z"/></svg>
-            Twitch Stream
-          </div>
-        </div>
-        <div class="embed-container">
-          <iframe src="https://player.twitch.tv/?channel=grewdon_gg21&parent=grewdon.github.io" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-        </div>
+    <!-- VIEW 2: ASSOCIATES / PARTNERS -->
+    <section id="associates-view" class="view-section">
+      <div class="profile-card" style="padding: 1.8rem 1.5rem;">
+        <h2 class="profile-name" style="font-size: 1.6rem;">Associates & Partners</h2>
+        <p class="profile-bio" style="margin-top: 0.2rem;">Featured creators, collaborators, and community partners in the GG21 network.</p>
       </div>
 
-      <!-- 4. Discord Link Card -->
-      <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" class="link-card">
-        <div class="link-left">
-          <div class="icon-box">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-          </div>
-          <div class="link-details">
-            <span class="link-title">Discord Server</span>
-            <span class="link-subtitle">Join the GG21 community</span>
+      <div class="associates-grid">
+        <!-- Associate Item 1: LuigiTime202 (Green Theme) -->
+        <div class="associate-card card-green">
+          <img class="associate-avatar" src="https://mkwiiki.org/w/images/0/0e/LuigiTime202%27s_Profile_Picture.png" alt="LuigiTime202 Avatar" onError="this.onerror=null;this.src='https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=250&q=80';">
+          <div class="associate-info">
+            <h3 class="associate-name">LuigiTime202</h3>
+            <span class="associate-role">Mario Kart Wii Modder & Streamer</span>
+            <p class="associate-bio">Creating custom content, modding Mario Kart Wii, and hosting live streams.</p>
+            <div class="associate-socials">
+              <a href="https://www.youtube.com/@luigitime202" target="_blank" rel="noopener noreferrer" class="social-btn">YouTube</a>
+              <a href="https://www.twitch.tv/luigitime202" target="_blank" rel="noopener noreferrer" class="social-btn">Twitch</a>
+              <a href="https://mkwiiki.org/wiki/User:LuigiTime202" target="_blank" rel="noopener noreferrer" class="social-btn">MKWii Wiki</a>
+            </div>
           </div>
         </div>
-        <div class="link-arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-      </a>
 
-      <!-- 5. Discord Widget Embed Card -->
-      <div class="discord-embed-card">
-        <div class="embed-header">
-          <div class="embed-title">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#00F2FE"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-            Discord Community
+        <!-- Associate Item 2: Eeveedrop1234 (Red Theme) -->
+        <div class="associate-card card-red">
+          <img class="associate-avatar" src="https://instagram.fmkc1-1.fna.fbcdn.net/v/t51.82787-19/670386465_18160466347429203_1375711201767667144_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=101&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=cHtROGR33HsQ7kNvwEn2rTx&_nc_oc=AdrgRIOi2YR1X8Kkuroytq2eiTl-e_GAbtVkLM6m7ywvsLWXrjdk08JFKrKl70GODNJK86igTsOAWw9Q2tfIyk0-&_nc_zt=24&_nc_ht=instagram.fmkc1-1.fna&_nc_gid=OnJvVHuQr6rB0pHCGYDeLg&_nc_ss=7b6a8&oh=00_AQNBHSjaexod7biUoO7rneUvdqxNsraDj61gov9DsbRuIg&oe=6AE2DAE3" alt="Eeveedrop1234 Avatar" onError="this.onerror=null;this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80';">
+          <div class="associate-info">
+            <h3 class="associate-name">Eeveedrop1234</h3>
+            <span class="associate-role">Artist & Digital Illustrator</span>
+            <p class="associate-bio">Digital artist creating custom illustrations and artwork.</p>
+            <div class="associate-socials">
+              <a href="https://linktr.ee/EeveeDrop" target="_blank" rel="noopener noreferrer" class="social-btn">Linktree</a>
+            </div>
           </div>
         </div>
-        <div class="discord-widget-container">
-          <iframe src="https://discord.com/widget?id=632696843373117493&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+
+        <!-- Associate Item 3: VasserDrachen -->
+        <div class="associate-card">
+          <img class="associate-avatar" src="https://yt3.googleusercontent.com/43jZ2T3o7-q8Keeu06gxUMOm6mrI73PZN2zFYwESAwlgBufEZVmJjg2s9aqC4FXlHRZDGWc9yb8=s160-c-k-c0x00ffffff-no-rj" alt="VasserDrachen Avatar" onError="this.onerror=null;this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80';">
+          <div class="associate-info">
+            <h3 class="associate-name">VasserDrachen</h3>
+            <span class="associate-role">SSBU & Pokkén Tournament Player / Music Artist</span>
+            <p class="associate-bio">Competitive Super Smash Bros. Ultimate & Pokkén Tournament competitor and music creator.</p>
+            <div class="associate-socials">
+              <a href="https://www.youtube.com/@vasserdrachen" target="_blank" rel="noopener noreferrer" class="social-btn">YouTube</a>
+            </div>
+          </div>
         </div>
       </div>
-
-      <!-- 6. Twitter / X -->
-      <a href="https://x.com/Grewdon_GG21" target="_blank" rel="noopener noreferrer" class="link-card">
-        <div class="link-left">
-          <div class="icon-box">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </div>
-          <div class="link-details">
-            <span class="link-title">Twitter / X</span>
-            <span class="link-subtitle">@Grewdon_GG21 updates</span>
-          </div>
-        </div>
-        <div class="link-arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-      </a>
-
-      <!-- 7. GitHub -->
-      <a href="https://github.com/Grewdon" target="_blank" rel="noopener noreferrer" class="link-card">
-        <div class="link-left">
-          <div class="icon-box">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-          </div>
-          <div class="link-details">
-            <span class="link-title">GitHub</span>
-            <span class="link-subtitle">Projects & source code</span>
-          </div>
-        </div>
-        <div class="link-arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-      </a>
-
-      <!-- 8. Speedrun.com (Bottom) -->
-      <a href="https://speedrun.com/user/grewdon_gg21" target="_blank" rel="noopener noreferrer" class="link-card">
-        <div class="link-left">
-          <div class="icon-box" style="color: #FFD700;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>
-          </div>
-          <div class="link-details">
-            <span class="link-title">Speedrun.com</span>
-            <span class="link-subtitle">Profile & leaderboards</span>
-          </div>
-        </div>
-        <div class="link-arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-      </a>
-
-    </div>
+    </section>
 
     <footer>
       <p>© <span id="year"></span> Grewdon_GG21 • Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
@@ -491,6 +882,48 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Sidebar & SPA Page Toggle Logic
+    const menuBtn = document.getElementById('menu-btn');
+    const closeBtn = document.getElementById('sidebar-close-btn');
+    const drawer = document.getElementById('sidebar-drawer');
+    const overlay = document.getElementById('sidebar-overlay');
+    const navItems = document.querySelectorAll('.nav-item');
+    const viewSections = document.querySelectorAll('.view-section');
+
+    function openSidebar() {
+      drawer.classList.add('active');
+      overlay.classList.add('active');
+    }
+
+    function closeSidebar() {
+      drawer.classList.remove('active');
+      overlay.classList.remove('active');
+    }
+
+    menuBtn.addEventListener('click', openSidebar);
+    closeBtn.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const targetId = item.getAttribute('data-target');
+
+        navItems.forEach(nav => nav.classList.remove('active'));
+        item.classList.add('active');
+
+        viewSections.forEach(section => {
+          if (section.id === targetId) {
+            section.classList.add('active');
+          } else {
+            section.classList.remove('active');
+          }
+        });
+
+        closeSidebar();
+      });
+    });
+
+    // Background Particles
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
 
