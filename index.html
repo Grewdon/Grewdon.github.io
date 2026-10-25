@@ -448,7 +448,6 @@
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      object-fit: cover;
       background: var(--bg-card);
       flex-shrink: 0;
       display: flex;
@@ -461,6 +460,12 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .game-icon img.fit-contain {
+      object-fit: contain;
+      padding: 6px;
     }
 
     .associate-info, .game-info {
@@ -568,6 +573,12 @@
     }
     .theme-emerald .game-icon { border: 2px solid var(--assoc-color); }
     .theme-emerald .game-subtitle-text { color: var(--assoc-color); }
+
+    .theme-amber {
+      --assoc-color: #F59E0B;
+    }
+    .theme-amber .game-icon { border: 2px solid var(--assoc-color); }
+    .theme-amber .game-subtitle-text { color: var(--assoc-color); }
 
     footer {
       text-align: center;
@@ -757,7 +768,7 @@
           </div>
         </a>
 
-        <!--8. Speedrun.com -->
+        <!-- 8. Speedrun.com -->
         <a href="https://speedrun.com/user/grewdon_gg21" target="_blank" rel="noopener noreferrer" class="link-card">
           <div class="link-left">
             <div class="icon-box" style="color: #FFD700;">
@@ -843,18 +854,18 @@
       <div class="game-card theme-gold">
         <div class="game-header">
           <div class="game-icon">
-            <img src="games/goldensun.gif">
+            <img src="games/goldensun.gif" alt="Golden Sun Venus Djinn" class="fit-contain" />
           </div>
           <div class="game-info">
             <span class="game-title-text">Golden Sun Series</span>
-            <span class="game-subtitle-text">Camelot Games</span>
+            <span class="game-subtitle-text">GBA & Nintendo DS</span>
           </div>
         </div>
         <p class="game-description">Classic RPG trilogy following the Adepts, Psynergy, and the journey across Weyard.</p>
         <div class="game-tags">
           <span class="game-tag">Golden Sun</span>
-          <span class="game-tag">Golden Sun: The Lost Age</span>
-          <span class="game-tag">Golden Sun: Dark Dawn</span>
+          <span class="game-tag">The Lost Age</span>
+          <span class="game-tag">Dark Dawn</span>
         </div>
       </div>
 
@@ -862,7 +873,7 @@
       <div class="game-card theme-cyan">
         <div class="game-header">
           <div class="game-icon">
-            <img src="games/hollowknight.png">
+            <img src="games/hollowknight.png alt="Hollow Knight Map Pin" class="fit-contain" />
           </div>
           <div class="game-info">
             <span class="game-title-text">Hollow Knight & Silksong</span>
@@ -872,31 +883,31 @@
         <p class="game-description">Exploring the vast, interconnected kingdom of Hallownest and the world of Pharloom.</p>
         <div class="game-tags">
           <span class="game-tag">Hollow Knight</span>
-          <span class="game-tag">Hollow Knight: Silksong</span>
+          <span class="game-tag">Silksong</span>
         </div>
       </div>
 
-      <!-- Game 3: Metroid Series (Red Theme) -->
+      <!-- Game 3: 2D Metroid Series (Red Theme) -->
       <div class="game-card theme-red">
         <div class="game-header">
           <div class="game-icon">
-            <img src="games/metroid.gif" alt="Metroid Series">
+            <img src="games/metroid.gif" alt="Metroid Sprite" class="fit-contain" />
           </div>
           <div class="game-info">
-            <span class="game-title-text">Metroid Series</span>
+            <span class="game-title-text">2D Metroid Series</span>
             <span class="game-subtitle-text">Nintendo / MercurySteam</span>
           </div>
         </div>
         <p class="game-description">Classic side-scrolling sci-fi action and exploration tracking Samus Aran's mainline missions.</p>
         <div class="game-tags">
-          <span class="game-tag">Metroid: Zero Mission</span>
-          <span class="game-tag">Samus Returns</span>
+          <span class="game-tag">Zero Mission</span>
           <span class="game-tag">AM2R (Fangame)</span>
+          <span class="game-tag">Samus Returns</span>
           <span class="game-tag">Super Metroid</span>
           <span class="game-tag">Super Metroid X Fusion (RomHack)</span>
-          <span class="game-tag">Metroid Fusion</span>
-          <span class="game-tag">Metroid Dread</span>
-          <span class="game-tag">Metroid Ravenous</span>
+          <span class="game-tag">Fusion</span>
+          <span class="game-tag">Dread</span>
+          <span class="game-tag">Ravenous</span>
         </div>
       </div>
 
@@ -904,7 +915,7 @@
       <div class="game-card theme-purple">
         <div class="game-header">
           <div class="game-icon">
-            <img src="games/pokemon.png" alt="Pokémon Series">
+            <img src="games/pokemon.png" alt="Great Ball" class="fit-contain" />
           </div>
           <div class="game-info">
             <span class="game-title-text">Pokémon Series</span>
@@ -913,12 +924,12 @@
         </div>
         <p class="game-description">Featured titles across modern generations, remakes, and action-RPG spin-offs.</p>
         <div class="game-tags">
-          <span class="game-tag">Pokémon Omega Ruby</span>
-          <span class="game-tag">Pokémon Ultra Moon</span>
-          <span class="game-tag">Pokémon Violet</span>
-          <span class="game-tag">Pokémon Legends: Arceus</span>
-          <span class="game-tag">Pokémon Legends: Z-A</span>
-          <span class="game-tag">Pokémon Champions</span>
+          <span class="game-tag">Omega Ruby</span>
+          <span class="game-tag">Ultra Moon/span>
+          <span class="game-tag">Violet</span>
+          <span class="game-tag">Legends: Arceus</span>
+          <span class="game-tag">Legends: Z-A</span>
+          <span class="game-tag">Champions</span>
         </div>
       </div>
 
@@ -926,14 +937,14 @@
       <div class="game-card theme-crimson">
         <div class="game-header">
           <div class="game-icon">
-            <img src="games/persona.jpg" alt="Persona Series">
+            <img src="games/persona.jpg" alt="Persona Logo" />
           </div>
           <div class="game-info">
             <span class="game-title-text">Persona Series</span>
             <span class="game-subtitle-text">Atlus / SEGA</span>
           </div>
         </div>
-        <p class="game-description">Stylish urban fantasy RPGs combining social simulation, turn-based combat, and psychological themes.</p>
+        <p class="game-description">Stylish turn-based RPGs blending dungeon crawling, social simulation, and unforgettable soundtracks.</p>
         <div class="game-tags">
           <span class="game-tag">Persona 5 Royal</span>
           <span class="game-tag">Persona 5 Strikers</span>
@@ -942,22 +953,62 @@
         </div>
       </div>
 
-      <!-- Game 6: Minecraft Series (Emerald Theme) -->
+      <!-- Game 6: Minecraft Games (Emerald Theme) -->
       <div class="game-card theme-emerald">
         <div class="game-header">
           <div class="game-icon">
-            <img src="games/minecraft.webp" alt="Minecraft Series">
+            <img src="games/minecraft.webp" alt="Minecraft Logo" class="fit-contain" />
           </div>
           <div class="game-info">
-            <span class="game-title-text">Minecraft Series</span>
-            <span class="game-subtitle-text">Mojang Studios</span>
+            <span class="game-title-text">Minecraft Games</span>
+            <span class="game-subtitle-text">Mojang Studios / Xbox Game Studios</span>
           </div>
         </div>
-        <p class="game-description">Sandbox survival, building, and action-adventure dungeon crawling adventures.</p>
+        <p class="game-description">Sandbox exploration, building adventures, and dungeon crawler spin-offs.</p>
         <div class="game-tags">
           <span class="game-tag">Minecraft</span>
           <span class="game-tag">Minecraft Dungeons</span>
-          <span class="game-tag">Minecraft Dungeons II</span>
+          <span class="game-tag">Minecraft Dungeons 2</span>
+        </div>
+      </div>
+
+      <!-- Game 7: Mario & Luigi Series (Red Theme) -->
+      <div class="game-card theme-red">
+        <div class="game-header">
+          <div class="game-icon">
+            <img src="games/mario&luigi.webp" alt="Green Shell" class="fit-contain" />
+          </div>
+          <div class="game-info">
+            <span class="game-title-text">Mario & Luigi Series</span>
+            <span class="game-subtitle-text">AlphaDream / Nintendo</span>
+          </div>
+        </div>
+        <p class="game-description">Turn-based RPG series featuring humorous stories, dynamic bros. action commands, and quirky adventure gameplay.</p>
+        <div class="game-tags">
+          <span class="game-tag">Superstar Saga + Bowser's Minions</span>
+          <span class="game-tag">Partners in Time</span>
+          <span class="game-tag">Bowser's Inside Story + Bowser Jr.'s Journey</span>
+          <span class="game-tag">Dream Team</span>
+          <span class="game-tag">Paper Jam</span>
+        </div>
+      </div>
+
+      <!-- Game 8: Luigi's Mansion Series (Amber Theme) -->
+      <div class="game-card theme-amber">
+        <div class="game-header">
+          <div class="game-icon">
+            <img src="games/luigismansion.webp" alt="Boo Luigi's Mansion" />
+          </div>
+          <div class="game-info">
+            <span class="game-title-text">Luigi's Mansion Series</span>
+            <span class="game-subtitle-text">Next Level Games / Nintendo</span>
+          </div>
+        </div>
+        <p class="game-description">Spooky action-adventure series following Luigi as he hunts ghosts and saves Mario with his trust Poltergust.</p>
+        <div class="game-tags">
+          <span class="game-tag">Luigi's Mansion (3DS)</span>
+          <span class="game-tag">Luigi's Mansion: Dark Moon</span>
+          <span class="game-tag">Luigi's Mansion 3</span>
         </div>
       </div>
 
