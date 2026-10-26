@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Grewdon_GG21 | Links & Games</title>
-  <meta name="description" content="Official link hub, livestream info, and featured games for Grewdon_GG21." />
+  <title>Grewdon_GG21 | Links & Gaming</title>
+  <meta name="description" content="Official link hub, livestream page, games, and Pokémon team showcase for Grewdon_GG21." />
   
   <!-- Favicon -->
   <link rel="icon" type="image/jpg" href="avatars/Grewdon.jpg">
@@ -12,15 +12,15 @@
   <!-- Open Graph / Discord Embed Metadata -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://grewdon.github.io/" />
-  <meta property="og:title" content="Grewdon_GG21 | Website" />
-  <meta property="og:description" content="Livestreamer & Content Creator. Official link hub, featured friends, and gaming list!" />
+  <meta property="og:title" content="Grewdon_GG21 | Links & Gaming" />
+  <meta property="og:description" content="Livestreamer & Content Creator. Official link hub, featured friends, game list, and Pokémon team showcase!" />
   <meta property="og:image" content="https://grewdon.github.io/avatars/Grewdon.jpg" />
 
   <!-- Twitter Card Metadata -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@Grewdon_GG21" />
-  <meta name="twitter:title" content="Grewdon_GG21 | Website" />
-  <meta name="twitter:description" content="Livestreamer & Content Creator. Official link hub, featured friends, and gaming list!" />
+  <meta name="twitter:title" content="Grewdon_GG21 | Links & Gaming" />
+  <meta name="twitter:description" content="Livestreamer & Content Creator. Official link hub, featured friends, game list, and Pokémon team showcase!" />
   <meta name="twitter:image" content="https://grewdon.github.io/avatars/Grewdon.jpg" />
 
   <!-- Discord Embed Accent Color Bar -->
@@ -64,7 +64,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 2.5rem 1rem;
+      padding: 2.5rem 1rem 2.5rem 280px; /* Offset for permanent sidebar on desktop */
       position: relative;
       overflow-x: hidden;
       line-height: 1.5;
@@ -92,8 +92,9 @@
       z-index: 0;
     }
 
-    /* Navigation Sidebar */
+    /* Navigation Sidebar (Permanent Desktop / Slide-out Mobile) */
     .menu-trigger {
+      display: none; /* Hidden on desktop */
       position: fixed;
       top: 1.25rem;
       left: 1.25rem;
@@ -104,7 +105,6 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
@@ -141,23 +141,19 @@
     .sidebar {
       position: fixed;
       top: 0;
-      left: -300px;
-      width: 280px;
+      left: 0;
+      width: 260px;
       height: 100%;
       background: rgba(15, 20, 32, 0.95);
       backdrop-filter: blur(20px);
       border-right: 1px solid var(--border-color);
       z-index: 120;
       padding: 2rem 1.5rem;
-      transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
       gap: 2rem;
       box-shadow: 10px 0 30px rgba(0,0,0,0.5);
-    }
-
-    .sidebar.open {
-      left: 0;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .sidebar-header {
@@ -174,6 +170,7 @@
     }
 
     .close-btn {
+      display: none; /* Hidden on desktop */
       background: none;
       border: none;
       color: var(--text-muted);
@@ -216,6 +213,11 @@
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+    }
+
+    /* Special wider container layout for Pokémon page */
+    .container.pokemon-container {
+      max-width: 1050px;
     }
 
     .page-section {
@@ -481,7 +483,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 50%;
     }
 
     .game-icon img.fit-contain {
@@ -549,63 +550,186 @@
       transition: var(--transition);
     }
 
-    /* Custom Theme Overrides */
-    .theme-green {
-      --assoc-color: #00E676;
+    /* --- POKÉMON PAGE TWO-COLUMN LAYOUT --- */
+    .pokemon-layout-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      width: 100%;
     }
-    .theme-green .associate-avatar, .theme-green .game-icon { border: 2px solid var(--assoc-color); }
-    .theme-green .associate-role, .theme-green .game-subtitle-text { color: var(--assoc-color); }
+
+    .trainer-sidebar-card {
+      background: linear-gradient(135deg, rgba(225, 29, 72, 0.25), rgba(26, 34, 52, 0.85));
+      border: 1px solid rgba(225, 29, 72, 0.4);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.2rem;
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 2rem;
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+
+    .trainer-native-img-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 3px solid #E11D48;
+      box-shadow: 0 0 25px rgba(225, 29, 72, 0.4);
+      background: #000;
+      padding: 1rem;
+    }
+
+    .trainer-native-img-wrapper img {
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+      object-fit: contain;
+    }
+
+    .trainer-sidebar-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .trainer-role-badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #FF3366;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .trainer-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .trainer-bio {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-top: 0.5rem;
+    }
+
+    .pokemon-team-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .pokemon-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: var(--transition);
+    }
+
+    .pokemon-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .pokemon-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .poke-sprite-box {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .poke-sprite-box img.fit-contain {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 4px;
+    }
+
+    .pokemon-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .poke-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .poke-attribute {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* Custom Theme Overrides */
+    .theme-green { --assoc-color: #00E676; }
+    .theme-green .associate-avatar, .theme-green .game-icon, .theme-green .poke-sprite-box { border: 2px solid var(--assoc-color); }
+    .theme-green .associate-role, .theme-green .game-subtitle-text, .theme-green .poke-attribute { color: var(--assoc-color); }
     .theme-green .associate-btn:hover { border-color: var(--assoc-color); color: var(--assoc-color); background: rgba(0, 230, 118, 0.1); }
 
-    .theme-red {
-      --assoc-color: #FF3366;
-    }
-    .theme-red .associate-avatar, .theme-red .game-icon { border: 2px solid var(--assoc-color); }
-    .theme-red .associate-role, .theme-red .game-subtitle-text { color: var(--assoc-color); }
+    .theme-red { --assoc-color: #FF3366; }
+    .theme-red .associate-avatar, .theme-red .game-icon, .theme-red .poke-sprite-box { border: 2px solid var(--assoc-color); }
+    .theme-red .associate-role, .theme-red .game-subtitle-text, .theme-red .poke-attribute { color: var(--assoc-color); }
     .theme-red .associate-btn:hover { border-color: var(--assoc-color); color: var(--assoc-color); background: rgba(255, 51, 102, 0.1); }
 
-    .theme-cyan {
-      --assoc-color: #00F2FE;
-    }
-    .theme-cyan .associate-avatar, .theme-cyan .game-icon { border: 2px solid var(--assoc-color); }
-    .theme-cyan .associate-role, .theme-cyan .game-subtitle-text { color: var(--assoc-color); }
+    .theme-cyan { --assoc-color: #00F2FE; }
+    .theme-cyan .associate-avatar, .theme-cyan .game-icon, .theme-cyan .poke-sprite-box { border: 2px solid var(--assoc-color); }
+    .theme-cyan .associate-role, .theme-cyan .game-subtitle-text, .theme-cyan .poke-attribute { color: var(--assoc-color); }
     .theme-cyan .associate-btn:hover { border-color: var(--assoc-color); color: var(--assoc-color); background: rgba(0, 242, 254, 0.1); }
 
-    .theme-gold {
-      --assoc-color: #FFD700;
-    }
-    .theme-gold .game-icon { border: 2px solid var(--assoc-color); }
-    .theme-gold .game-subtitle-text { color: var(--assoc-color); }
+    .theme-gold { --assoc-color: #FFD700; }
+    .theme-gold .game-icon, .theme-gold .poke-sprite-box { border: 2px solid var(--assoc-color); }
+    .theme-gold .game-subtitle-text, .theme-gold .poke-attribute { color: var(--assoc-color); }
 
-    .theme-purple {
-      --assoc-color: #A855F7;
-    }
-    .theme-purple .game-icon { border: 2px solid var(--assoc-color); }
-    .theme-purple .game-subtitle-text { color: var(--assoc-color); }
+    .theme-purple { --assoc-color: #A855F7; }
+    .theme-purple .game-icon, .theme-purple .poke-sprite-box { border: 2px solid var(--assoc-color); }
+    .theme-purple .game-subtitle-text, .theme-purple .poke-attribute { color: var(--assoc-color); }
 
-    .theme-crimson {
-      --assoc-color: #E11D48;
-    }
-    .theme-crimson .game-icon { border: 2px solid var(--assoc-color); }
-    .theme-crimson .game-subtitle-text { color: var(--assoc-color); }
+    .theme-crimson { --assoc-color: #E11D48; }
+    .theme-crimson .game-icon, .theme-crimson .poke-sprite-box { border: 2px solid var(--assoc-color); }
+    .theme-crimson .game-subtitle-text, .theme-crimson .poke-attribute { color: var(--assoc-color); }
 
-    .theme-emerald {
-      --assoc-color: #10B981;
-    }
-    .theme-emerald .game-icon { border: 2px solid var(--assoc-color); }
-    .theme-emerald .game-subtitle-text { color: var(--assoc-color); }
+    .theme-emerald { --assoc-color: #10B981; }
+    .theme-emerald .game-icon, .theme-emerald .poke-sprite-box { border: 2px solid var(--assoc-color); }
+    .theme-emerald .game-subtitle-text, .theme-emerald .poke-attribute { color: var(--assoc-color); }
 
-    .theme-amber {
-      --assoc-color: #F59E0B;
-    }
-    .theme-amber .game-icon { border: 2px solid var(--assoc-color); }
-    .theme-amber .game-subtitle-text { color: var(--assoc-color); }
+    .theme-amber { --assoc-color: #F59E0B; }
+    .theme-amber .game-icon, .theme-amber .poke-sprite-box { border: 2px solid var(--assoc-color); }
+    .theme-amber .game-subtitle-text, .theme-amber .poke-attribute { color: var(--assoc-color); }
 
     footer {
       text-align: center;
       font-size: 0.85rem;
       color: var(--text-muted);
-      margin-top: 1rem;
+      margin-top: 2rem;
+      grid-column: 1 / -1;
     }
 
     footer a {
@@ -613,18 +737,28 @@
       text-decoration: none;
     }
 
-    @media (max-width: 480px) {
+    /* Responsive adjustments for mobile screens */
+    @media (max-width: 900px) {
       body {
-        padding: 1.5rem 0.8rem;
+        padding: 2.5rem 1rem !important;
       }
-      .profile-card {
-        padding: 1.8rem 1.2rem;
+      .menu-trigger {
+        display: flex;
       }
-      .profile-name {
-        font-size: 1.6rem;
+      .close-btn {
+        display: block;
       }
-      .twitch-embed-card {
-        padding: 1rem;
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .pokemon-layout-grid {
+        grid-template-columns: 1fr;
+      }
+      .trainer-sidebar-card {
+        position: static;
       }
     }
   </style>
@@ -634,13 +768,14 @@
   <canvas id="particles-canvas"></canvas>
   <div class="bg-gradient-overlay"></div>
 
-  <!-- Sidebar Trigger -->
+  <!-- Mobile Sidebar Trigger -->
   <button class="menu-trigger" id="openSidebar" aria-label="Open Navigation">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
   </button>
 
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
+  <!-- Permanent Desktop / Slide-out Mobile Sidebar -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <h3>Navigation</h3>
@@ -656,16 +791,24 @@
         Friends
       </button>
       <button class="nav-item" onclick="switchPage('games')">
-        <!-- Game Controller Icon -->
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4m-2-2v4"/><circle cx="15" cy="11" r="1" fill="currentColor"/><circle cx="18" cy="13" r="1" fill="currentColor"/></svg>
         Games
+      </button>
+      <button class="nav-item" onclick="switchPage('stream')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Stream
+      </button>
+      <button class="nav-item" onclick="switchPage('pokemon')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><circle cx="12" cy="12" r="3"/></svg>
+        Pokémon
       </button>
     </nav>
   </aside>
 
-  <main class="container">
+  <!-- Standard Container for Links, Friends, Games, Stream -->
+  <main class="container" id="mainContainer">
 
-    <!-- PAGE 1: LINKS-->
+    <!-- PAGE 1: LINKS -->
     <div id="page-links" class="page-section active">
       <section class="profile-card">
         <div class="avatar-wrapper">
@@ -713,20 +856,7 @@
           </div>
         </a>
 
-        <!-- 3. Twitch Embed Card -->
-        <div class="twitch-embed-card">
-          <div class="embed-header">
-            <div class="embed-title">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="#00F2FE"><path d="M11.571 1.429L1.429 4.286v15.714h5.714V22.5l2.857-2.857h3.571l7.143-7.143V1.429h-9.143zm7.714 9.714l-2.857 2.857h-4.286l-2.143 2.143v-2.143H6.429V5.714h12.856v5.429zM15 7.857h2.143v5.714H15V7.857zm-4.286 0h2.143v5.714h-2.143V7.857z"/></svg>
-              Twitch Stream
-            </div>
-          </div>
-          <div class="embed-container">
-            <iframe src="https://player.twitch.tv/?channel=grewdon_gg21&parent=grewdon.github.io" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-          </div>
-        </div>
-
-        <!-- 4. Discord Link Card -->
+        <!-- 3. Discord Link Card -->
         <a href="https://discord.gg/BG4Uz6PDZp" target="_blank" rel="noopener noreferrer" class="link-card">
           <div class="link-left">
             <div class="icon-box">
@@ -742,7 +872,7 @@
           </div>
         </a>
 
-        <!-- 5. Twitter / X -->
+        <!-- 4. Twitter / X -->
         <a href="https://x.com/Grewdon_GG21" target="_blank" rel="noopener noreferrer" class="link-card">
           <div class="link-left">
             <div class="icon-box">
@@ -758,7 +888,7 @@
           </div>
         </a>
 
-        <!-- 6. Bluesky -->
+        <!-- 5. Bluesky -->
         <a href="https://bsky.app/profile/did:plc:4qit4ydsfrt6yajnzbdrdf2r" target="_blank" rel="noopener noreferrer" class="link-card">
           <div class="link-left">
             <div class="icon-box">
@@ -774,7 +904,7 @@
           </div>
         </a>
 
-        <!-- 7. GitHub -->
+        <!-- 6. GitHub -->
         <a href="https://github.com/Grewdon" target="_blank" rel="noopener noreferrer" class="link-card">
           <div class="link-left">
             <div class="icon-box">
@@ -790,7 +920,7 @@
           </div>
         </a>
 
-        <!-- 8. Speedrun.com -->
+        <!-- 7. Speedrun.com -->
         <a href="https://speedrun.com/user/grewdon_gg21" target="_blank" rel="noopener noreferrer" class="link-card">
           <div class="link-left">
             <div class="icon-box" style="color: #FFD700;">
@@ -807,6 +937,10 @@
         </a>
 
       </div>
+
+      <footer>
+        <p>© <span id="year"></span> Grewdon_GG21 • Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
+      </footer>
     </div>
 
     <!-- PAGE 2: FRIENDS -->
@@ -863,6 +997,9 @@
         </div>
       </div>
 
+      <footer>
+        <p>© <span id="year"></span> Grewdon_GG21 • Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
+      </footer>
     </div>
 
     <!-- PAGE 3: GAMES -->
@@ -1034,22 +1171,170 @@
         </div>
       </div>
 
+      <footer>
+        <p>© <span id="year"></span> Grewdon_GG21 • Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    <!-- PAGE 4: STREAM -->
+    <div id="page-stream" class="page-section">
+      <div class="twitch-embed-card">
+        <div class="embed-header">
+          <div class="embed-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#00F2FE"><path d="M11.571 1.429L1.429 4.286v15.714h5.714V22.5l2.857-2.857h3.571l7.143-7.143V1.429h-9.143zm7.714 9.714l-2.857 2.857h-4.286l-2.143 2.143v-2.143H6.429V5.714h12.856v5.429zM15 7.857h2.143v5.714H15V7.857zm-4.286 0h2.143v5.714h-2.143V7.857z"/></svg>
+            Live Stream
+          </div>
+        </div>
+        <div class="embed-container">
+          <iframe src="https://player.twitch.tv/?channel=grewdon_gg21&parent=grewdon.github.io" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+        </div>
+      </div>
+
+      <footer>
+        <p>© <span id="year"></span> Grewdon_GG21 • Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+  </main>
+
+  <!-- PAGE 5: POKÉMON SHOWCASE (Dedicated wide layout container) -->
+  <div class="container pokemon-container page-section" id="page-pokemon">
+    <div class="pokemon-layout-grid">
+
+      <!-- Left Column: Trainer Profile Card (Sticky Sidebar format with native image sizing) -->
+      <section class="trainer-sidebar-card">
+        <div class="trainer-native-img-wrapper">
+          <img src="pokemon/grewdon.png" alt="Team Magma Admin Grewdon">
+        </div>
+        <div class="trainer-sidebar-info">
+          <span class="trainer-role-badge">Team Magma Admin</span>
+          <h2 class="trainer-title">Admin Grewdon</h2>
+          <p class="trainer-bio">Team Magma Admin. Master of battle mechanics, Mega Evolutions, and regional gimmicks.</p>
+        </div>
+      </section>
+
+      <!-- Right Column: 6 Pokémon Team Grid -->
+      <div class="pokemon-team-column">
+
+        <!-- 1. Lucario -->
+        <div class="pokemon-card theme-cyan">
+          <div class="pokemon-header">
+            <div class="poke-sprite-box">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/448.png" alt="Lucario" class="fit-contain" />
+            </div>
+            <div class="pokemon-info">
+              <span class="poke-name">Lucario</span>
+              <span class="poke-attribute">Battle Bond Form</span>
+            </div>
+          </div>
+          <div class="game-tags">
+            <span class="game-tag">Fighting / Steel</span>
+            <span class="game-tag">Ability: Battle Bond</span>
+          </div>
+        </div>
+
+        <!-- 2. Incineroar -->
+        <div class="pokemon-card theme-red">
+          <div class="pokemon-header">
+            <div class="poke-sprite-box">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/727.png" alt="Incineroar" class="fit-contain" />
+            </div>
+            <div class="pokemon-info">
+              <span class="poke-name">Incineroar</span>
+              <span class="poke-attribute">Holding Incinium-Z</span>
+            </div>
+          </div>
+          <div class="game-tags">
+            <span class="game-tag">Fire / Dark</span>
+            <span class="game-tag">Z-Move: Malicious Moonsault</span>
+          </div>
+        </div>
+
+        <!-- 3. Meowscarada -->
+        <div class="pokemon-card theme-emerald">
+          <div class="pokemon-header">
+            <div class="poke-sprite-box">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/908.png" alt="Meowscarada" class="fit-contain" />
+            </div>
+            <div class="pokemon-info">
+              <span class="poke-name">Meowscarada</span>
+              <span class="poke-attribute">Terastal Phenomenon</span>
+            </div>
+          </div>
+          <div class="game-tags">
+            <span class="game-tag">Grass / Dark</span>
+            <span class="game-tag">Mechanic: Terastallization</span>
+          </div>
+        </div>
+
+        <!-- 4. Gengar -->
+        <div class="pokemon-card theme-purple">
+          <div class="pokemon-header">
+            <div class="poke-sprite-box">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10202.png" alt="Gigantamax Gengar" class="fit-contain" />
+            </div>
+            <div class="pokemon-info">
+              <span class="poke-name">Gengar</span>
+              <span class="poke-attribute">Gigantamax Form</span>
+            </div>
+          </div>
+          <div class="game-tags">
+            <span class="game-tag">Ghost / Poison</span>
+            <span class="game-tag">G-Max Move: G-Max Terror</span>
+          </div>
+        </div>
+
+        <!-- 5. Alpha Hisuian Goodra -->
+        <div class="pokemon-card theme-amber">
+          <div class="pokemon-header">
+            <div class="poke-sprite-box">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10242.png" alt="Hisuian Goodra" class="fit-contain" />
+            </div>
+            <div class="pokemon-info">
+              <span class="poke-name">Hisuian Goodra</span>
+              <span class="poke-attribute">Alpha Size Variant</span>
+            </div>
+          </div>
+          <div class="game-tags">
+            <span class="game-tag">Steel / Dragon</span>
+            <span class="game-tag">Status: Alpha Pokémon</span>
+          </div>
+        </div>
+
+        <!-- 6. Swampert -->
+        <div class="pokemon-card theme-cyan">
+          <div class="pokemon-header">
+            <div class="poke-sprite-box">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10064.png" alt="Mega Swampert" class="fit-contain" />
+            </div>
+            <div class="pokemon-info">
+              <span class="poke-name">Swampert</span>
+              <span class="poke-attribute">Holding Swampertite</span>
+            </div>
+          </div>
+          <div class="game-tags">
+            <span class="game-tag">Water / Ground</span>
+            <span class="game-tag">Mechanic: Mega Evolution</span>
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
     <footer>
       <p>© <span id="year"></span> Grewdon_GG21 • Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
     </footer>
-
-  </main>
+  </div>
 
   <script>
     // Dynamic Year Element Safe Handling
-    const yearElem = document.getElementById('year');
-    if (yearElem) {
-      yearElem.textContent = new Date().getFullYear();
-    }
+    const yearElem = document.querySelectorAll('#year');
+    yearElem.forEach(el => {
+      el.textContent = new Date().getFullYear();
+    });
 
-    // Sidebar Toggles
+    // Mobile Sidebar Toggles
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
     
@@ -1068,19 +1353,32 @@
     sidebarOverlay.addEventListener('click', () => toggleSidebar(false));
 
     // Page Switching Logic
+    const mainContainer = document.getElementById('mainContainer');
+    const pokemonContainer = document.getElementById('page-pokemon');
+
     function switchPage(pageId) {
       document.querySelectorAll('.page-section').forEach(page => page.classList.remove('active'));
       document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
 
       if (pageId === 'links') {
+        mainContainer.classList.remove('pokemon-container');
         document.getElementById('page-links').classList.add('active');
         document.querySelectorAll('.nav-item')[0].classList.add('active');
       } else if (pageId === 'associates') {
+        mainContainer.classList.remove('pokemon-container');
         document.getElementById('page-associates').classList.add('active');
         document.querySelectorAll('.nav-item')[1].classList.add('active');
       } else if (pageId === 'games') {
+        mainContainer.classList.remove('pokemon-container');
         document.getElementById('page-games').classList.add('active');
         document.querySelectorAll('.nav-item')[2].classList.add('active');
+      } else if (pageId === 'stream') {
+        mainContainer.classList.remove('pokemon-container');
+        document.getElementById('page-stream').classList.add('active');
+        document.querySelectorAll('.nav-item')[3].classList.add('active');
+      } else if (pageId === 'pokemon') {
+        pokemonContainer.classList.add('active');
+        document.querySelectorAll('.nav-item')[4].classList.add('active');
       }
 
       toggleSidebar(false);
