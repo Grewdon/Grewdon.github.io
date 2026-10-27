@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Live Stream | Grewdon_GG21</title>
-  <meta name="description" content="Watch live streams from Grewdon_GG21." />
+  <meta name="description" content="Watch live streams and chat with Grewdon_GG21." />
   
   <!-- Favicon -->
   <link rel="icon" type="image/jpg" href="avatars/Grewdon.jpg">
@@ -13,14 +13,14 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://grewdon.github.io/stream" />
   <meta property="og:title" content="Live Stream | Grewdon_GG21" />
-  <meta property="og:description" content="Official Twitch livestream feed for Grewdon_GG21." />
+  <meta property="og:description" content="Official Twitch livestream feed and chat for Grewdon_GG21." />
   <meta property="og:image" content="https://grewdon.github.io/avatars/Grewdon.jpg" />
 
   <!-- Twitter Card Metadata -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@Grewdon_GG21" />
   <meta name="twitter:title" content="Live Stream | Grewdon_GG21" />
-  <meta name="twitter:description" content="Official Twitch livestream feed for Grewdon_GG21." />
+  <meta name="twitter:description" content="Official Twitch livestream feed and chat for Grewdon_GG21." />
   <meta name="twitter:image" content="https://grewdon.github.io/avatars/Grewdon.jpg" />
 
   <!-- Discord Embed Accent Color Bar -->
@@ -207,7 +207,7 @@
 
     .container {
       width: 100%;
-      max-width: 680px;
+      max-width: 1080px;
       z-index: 10;
       position: relative;
       display: flex;
@@ -215,7 +215,8 @@
       gap: 1.5rem;
     }
 
-    .twitch-embed-card {
+    .twitch-embed-card,
+    .schedule-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
@@ -227,17 +228,17 @@
       box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
     }
 
-    .embed-header {
+    .card-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-bottom: 0.5rem;
+      padding-bottom: 0.75rem;
       border-bottom: 1px solid var(--border-color);
     }
 
-    .embed-title {
+    .card-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: #FFF;
       display: flex;
@@ -245,23 +246,107 @@
       gap: 0.5rem;
     }
 
-    .embed-container {
+    .timezone-badge {
+      font-size: 0.75rem;
+      color: var(--accent-primary);
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    /* Side-by-side stream & chat grid layout */
+    .stream-layout {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 1.25rem;
+      width: 100%;
+      align-items: start;
+    }
+
+    .video-wrapper {
       position: relative;
       width: 100%;
-      padding-top: 56.25%;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
       border-radius: var(--radius-md);
       overflow: hidden;
       background: #000;
       border: 1px solid rgba(255,255,255,0.05);
     }
 
-    .embed-container iframe {
+    .video-wrapper iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       border: none;
+    }
+
+    .chat-wrapper {
+      width: 100%;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.05);
+      background: #000;
+      height: 500px;
+    }
+
+    .chat-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Schedule Grid Layout */
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 0.25rem;
+    }
+
+    .schedule-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .schedule-item:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .schedule-day {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .schedule-time {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .schedule-game {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-top: 0.25rem;
     }
 
     footer {
@@ -274,6 +359,15 @@
     footer a {
       color: var(--accent-primary);
       text-decoration: none;
+    }
+
+    @media (max-width: 1100px) {
+      .stream-layout {
+        grid-template-columns: 1fr;
+      }
+      .chat-wrapper {
+        height: 450px;
+      }
     }
 
     @media (max-width: 900px) {
@@ -314,7 +408,7 @@
       <button class="close-btn" id="closeSidebar">&times;</button>
     </div>
     <nav class="sidebar-nav">
-      <a href="https://grewdon.github.io/" class="nav-item active">
+      <a href="https://grewdon.github.io" class="nav-item">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
         Links
       </a>
@@ -326,7 +420,7 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4m-2-2v4"/><circle cx="15" cy="11" r="1" fill="currentColor"/><circle cx="18" cy="13" r="1" fill="currentColor"/></svg>
         Games
       </a>
-      <a href="https://grewdon.github.io/stream" class="nav-item">
+      <a href="https://grewdon.github.io/stream" class="nav-item active">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         Stream
       </a>
@@ -340,14 +434,68 @@
   <!-- STREAM CONTAINER -->
   <main class="container">
     <div class="twitch-embed-card">
-      <div class="embed-header">
-        <div class="embed-title">
+      <div class="card-header">
+        <div class="card-title">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="#00F2FE"><path d="M11.571 1.429L1.429 4.286v15.714h5.714V22.5l2.857-2.857h3.571l7.143-7.143V1.429h-9.143zm7.714 9.714l-2.857 2.857h-4.286l-2.143 2.143v-2.143H6.429V5.714h12.856v5.429zM15 7.857h2.143v5.714H15V7.857zm-4.286 0h2.143v5.714h-2.143V7.857z"/></svg>
-          Live Stream
+          Live Stream & Chat
         </div>
       </div>
-      <div class="embed-container">
-        <iframe src="https://player.twitch.tv/?channel=grewdon_gg21&parent=grewdon.github.io" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+      
+      <!-- Side-by-side Stream & Chat Container -->
+      <div class="stream-layout">
+        <div class="video-wrapper">
+          <iframe src="https://player.twitch.tv/?channel=grewdon_gg21&parent=grewdon.github.io" frameborder="0" allowfullscreen="true" scrolling="no"></iframe>
+        </div>
+        
+        <div class="chat-wrapper">
+          <iframe id="chat_embed" src="https://www.twitch.tv/embed/grewdon_gg21/chat?parent=grewdon.github.io"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- STREAM SCHEDULE PLACEHOLDER -->
+    <div class="schedule-card">
+      <div class="card-header">
+        <div class="card-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Stream Schedule
+        </div>
+        <span class="timezone-badge" id="user-tz-label">Local Time</span>
+      </div>
+
+      <div class="schedule-grid">
+        <div class="schedule-item">
+          <div class="schedule-day">
+            <span>Daily</span>
+          </div>
+          <div class="schedule-time">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span class="11:00 PM MST"</span>
+          </div>
+          <div class="schedule-game">Games with EeveeDrop</div>
+        </div>
+
+        <div class="schedule-item">
+          <div class="schedule-day">
+            <span>Saturday(?)</span>
+          </div>
+          <div class="schedule-time">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span class="1:00 PM MST(?)"</span>
+          </div>
+          <div class="schedule-game">Archipelago(?)</div>
+        </div>
+
+        <div class="schedule-item">
+          <div class="schedule-day">
+            <span>Specials</span>
+          </div>
+          <div class="schedule-time">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span>Check Discord</span>
+          </div>
+          <div class="schedule-game">Surprise Streams</div>
+        </div>
       </div>
     </div>
 
@@ -358,6 +506,34 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Convert times dynamically to viewer's local timezone
+    function updateScheduleTimes() {
+      const userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const tzAbbr = new Date().toLocaleDateString('en-US', { timeZoneName: 'short' }).split(' ')[1] || userTZ;
+      
+      const tzBadge = document.getElementById('user-tz-label');
+      if (tzBadge) {
+        tzBadge.textContent = `Your Timezone (${tzAbbr})`;
+      }
+
+      const timeElements = document.querySelectorAll('.convert-time');
+      timeElements.forEach(el => {
+        const utcTimeString = el.getAttribute('data-utc');
+        if (!utcTimeString) return;
+
+        const [hours, minutes] = utcTimeString.split(':').map(Number);
+        const dayOffset = parseInt(el.getAttribute('data-day-offset') || '0', 10);
+
+        const now = new Date();
+        const utcDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + dayOffset, hours, minutes));
+
+        const localTimeStr = utcDate.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+        el.textContent = `${localTimeStr} (${tzAbbr})`;
+      });
+    }
+
+    updateScheduleTimes();
 
     // Mobile Sidebar Toggles
     const sidebar = document.getElementById('sidebar');
