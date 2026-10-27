@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pokémon Showcase | Grewdon_GG21</title>
+  <meta name="description" content="Pokémon showcase and team roster for Grewdon_GG21." />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpg" href="avatars/Grewdon.jpg">
+
+  <!-- Open Graph / Discord Embed Metadata -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://grewdon.github.io/pokemon.html" />
+  <meta property="og:title" content="Pokémon Showcase | Grewdon_GG21" />
+  <meta property="og:description" content="Official Pokémon team showcase and collection roster for Grewdon_GG21." />
+  <meta property="og:image" content="https://grewdon.github.io/avatars/Grewdon.jpg" />
+
+  <!-- Twitter Card Metadata -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@Grewdon_GG21" />
+  <meta name="twitter:title" content="Pokémon Showcase | Grewdon_GG21" />
+  <meta name="twitter:description" content="Official Pokémon team showcase and collection roster for Grewdon_GG21." />
+  <meta name="twitter:image" content="https://grewdon.github.io/avatars/Grewdon.jpg" />
+
+  <!-- Discord Embed Accent Color Bar -->
+  <meta name="theme-color" content="#00F2FE" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-base: #0B0E14;
+      --bg-surface: rgba(18, 24, 38, 0.75);
+      --bg-card: rgba(26, 34, 52, 0.55);
+      --bg-card-hover: rgba(36, 48, 74, 0.75);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(0, 242, 254, 0.4);
+      --accent-primary: #00F2FE;
+      --accent-glow: rgba(0, 242, 254, 0.35);
+      --accent-secondary: #FF007A;
+      --text-main: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2.5rem 1rem 2.5rem 280px; /* Offset for permanent sidebar on desktop */
+      position: relative;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bg-gradient-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at 50% 0%, rgba(0, 242, 254, 0.12), transparent 70%),
+                  radial-gradient(circle at 80% 80%, rgba(255, 0, 122, 0.08), transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Navigation Sidebar */
+    .menu-trigger {
+      display: none; /* Hidden on desktop */
+      position: fixed;
+      top: 1.25rem;
+      left: 1.25rem;
+      z-index: 100;
+      background: rgba(20, 26, 40, 0.8);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: var(--transition);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .menu-trigger:hover {
+      border-color: var(--accent-primary);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 110;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .sidebar-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 260px;
+      height: 100%;
+      background: rgba(15, 20, 32, 0.95);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid var(--border-color);
+      z-index: 120;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+    }
+
+    .sidebar-header h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+    }
+
+    .close-btn {
+      display: none; /* Hidden on desktop */
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .nav-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1050px;
+      z-index: 10;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* POKÉMON PAGE LAYOUT */
+    .pokemon-layout-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      width: 100%;
+    }
+
+    .trainer-sidebar-card {
+      background: linear-gradient(135deg, rgba(225, 29, 72, 0.25), rgba(26, 34, 52, 0.85));
+      border: 1px solid rgba(225, 29, 72, 0.4);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.2rem;
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 2rem;
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+
+    .trainer-native-img-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 3px solid #E11D48;
+      box-shadow: 0 0 25px rgba(225, 29, 72, 0.4);
+      background: #000;
+      padding: 1rem;
+    }
+
+    .trainer-native-img-wrapper img {
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+      object-fit: contain;
+    }
+
+    .trainer-sidebar-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .trainer-role-badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #FF3366;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .trainer-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .trainer-bio {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-top: 0.5rem;
+    }
+
+    .pokemon-team-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .pokemon-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: var(--transition);
+    }
+
+    .pokemon-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .pokemon-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .poke-sprite-box {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .poke-sprite-box img.fit-contain {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 4px;
+    }
+
+    .pokemon-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .poke-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .poke-attribute {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .game-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .game-tag {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Roster Grid Section for Other Pokémon */
+    .roster-section {
+      width: 100%;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .roster-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #FFF;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.75rem;
+    }
+
+    .roster-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .roster-square-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1rem;
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.6rem;
+      transition: var(--transition);
+    }
+
+    .roster-square-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-primary);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px -5px rgba(0, 242, 254, 0.2);
+    }
+
+    .roster-sprite-box {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .roster-sprite-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 4px;
+    }
+
+    .roster-poke-nickname {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--accent-primary);
+    }
+
+    .roster-poke-species {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Theme Overrides */
+    .theme-cyan { --assoc-color: #00F2FE; }
+    .theme-cyan .poke-sprite-box { border: 2px solid var(--assoc-color); }
+    .theme-cyan .poke-attribute { color: var(--assoc-color); }
+
+    .theme-red { --assoc-color: #FF3366; }
+    .theme-red .poke-sprite-box { border: 2px solid var(--assoc-color); }
+    .theme-red .poke-attribute { color: var(--assoc-color); }
+
+    .theme-yellow { --assoc-color: #FACC15; }
+    .theme-yellow .poke-sprite-box { border: 2px solid var(--assoc-color); }
+    .theme-yellow .poke-attribute { color: var(--assoc-color); }
+
+    .theme-purple { --assoc-color: #A855F7; }
+    .theme-purple .poke-sprite-box { border: 2px solid var(--assoc-color); }
+    .theme-purple .poke-attribute { color: var(--assoc-color); }
+
+    .theme-amber { --assoc-color: #F59E0B; }
+    .theme-amber .poke-sprite-box { border: 2px solid var(--assoc-color); }
+    .theme-amber .poke-attribute { color: var(--assoc-color); }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 2.5rem;
+      grid-column: 1 / -1;
+    }
+
+    footer a {
+      color: var(--accent-primary);
+      text-decoration: none;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        padding: 2.5rem 1rem !important;
+      }
+      .menu-trigger {
+        display: flex;
+      }
+      .close-btn {
+        display: block;
+      }
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .pokemon-layout-grid {
+        grid-template-columns: 1fr;
+      }
+      .trainer-sidebar-card {
+        position: static;
+      }
+      .roster-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="particles-canvas"></canvas>
+  <div class="bg-gradient-overlay"></div>
+
+  <!-- Mobile Sidebar Trigger -->
+  <button class="menu-trigger" id="openSidebar" aria-label="Open Navigation">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+  </button>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Permanent Desktop / Slide-out Mobile Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h3>Navigation</h3>
+      <button class="close-btn" id="closeSidebar">&times;</button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html#links" class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+        Links
+      </a>
+      <a href="index.html#associates" class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        Friends
+      </a>
+      <a href="index.html#games" class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4m-2-2v4"/><circle cx="15" cy="11" r="1" fill="currentColor"/><circle cx="18" cy="13" r="1" fill="currentColor"/></svg>
+        Games
+      </a>
+      <a href="index.html#stream" class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Stream
+      </a>
+      <a href="pokemon.html" class="nav-item active">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><circle cx="12" cy="12" r="3"/></svg>
+        Pokémon
+      </a>
+    </nav>
+  </aside>
+
+  <!-- POKÉMON SHOWCASE CONTAINER -->
+  <main class="container">
+    <div class="pokemon-layout-grid">
+
+      <!-- Left Column: Trainer Profile Card -->
+      <section class="trainer-sidebar-card">
+        <div class="trainer-native-img-wrapper">
+          <img src="pokemon/grewdon.png" alt="Team Magma Admin Grewdon">
+        </div>
+        <div class="trainer-sidebar-info">
+          <span class="trainer-role-badge">Team Magma Admin</span>
+          <h2 class="trainer-title">Grewdon</h2>
+          <p class="trainer-bio">Team Magma Admin. Born in Galar, but started his Pokémon journey late at 18 in Hoenn with his Riolu.</p>
+        </div>
+      </section>
+
+      <!-- Right Column: 6 Main Pokémon Team Grid -->
+      <div class="pokemon-team-column">
+
+        <!-- 1. Lucario -->
+        <div class="pokemon-card theme-cyan">
+          <div class="pokemon-header">
+            <div class="poke-sprite-box">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/448.png" alt="Lucario" class="fit-contain" />
+            </div>
+            <div class="pokemon-info">
+              <span class="poke-name">Anubis</span>
+              <span class="poke-attribute">Lucario</span>
+            </div>
+          </div>
+          <div class="game-tags">
+            <span class="game-tag">Fighting / Steel</span>
+            <span class="game-tag">Starter</span>
+            <span class="game-tag">Ability: Battle Bond</span>
+          </div>
+        </div>
+
+        <!-- 2. Swampert -->
+        <div class="pokemon-card theme-cyan">
+          <div class="pokemon-header">
+            <div class="poke-sprite-box">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10064.png" alt="Mega Swampert" class="fit-contain" />
+            </div>
+            <div class="pokemon-info">
+              <span class="poke-name">Azul</span>
+              <span class="poke-attribute">Swampert</span>
+            </div>
+          </div>
+          <div class="game-tags">
+            <span class="game-tag">Water / Ground</span>
+            <span class="game-tag">Hoenn Starter</span>
+            <span class="game-tag">Swampertite</span>
+          </div>
+        </div>
+        
+        <!-- 3. Incineroar -->
+        <div class="pokemon-card theme-red">
+          <div class="pokemon-header">
+            <div class="poke-sprite-box">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/727.png" alt="Incineroar" class="fit-contain" />
+            </div>
+            <div class="pokemon-info">
+              <span class="poke-name">Kirin</span>
+              <span class="poke-attribute">Incineroar</span>
+            </div>
+          </div>
+          <div class="game-tags">
+            <span class="game-tag">Fire / Dark</span>
+            <span class="game-tag">Alola Starter</span>
+            <span class="game-tag">Malicious Moonsault</span>
+          </div>
+        </div>
+
+        <!-- 4. Vikavolt -->
+        <div class="pokemon-card theme-yellow">
+          <div class="pokemon-header">
+            <div class="poke-sprite-box">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/738.png" alt="Vikavolt" class="fit-contain" />
+            </div>
+            <div class="pokemon-info">
+              <span class="poke-name">Vikavolt</span>
+              <span class="poke-attribute">Bug / Electric</span>
+            </div>
+          </div>
+          <div class="game-tags">
+            <span class="game-tag">Bug / Electric</span>
+            <span class="game-tag">Alola Region</span>
+            <span class="game-tag">Ability: Levitate</span>
+          </div>
+        </div>
+
+        <!-- 5. Gengar -->
+        <div class="pokemon-card theme-purple">
+          <div class="pokemon-header">
+            <div class="poke-sprite-box">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10202.png" alt="Gigantamax Gengar" class="fit-contain" />
+            </div>
+            <div class="pokemon-info">
+              <span class="poke-name">Osiris</span>
+              <span class="poke-attribute">Gengar</span>
+            </div>
+          </div>
+          <div class="game-tags">
+            <span class="game-tag">Ghost / Poison</span>
+            <span class="game-tag">G-Max Terror</span>
+          </div>
+        </div>
+
+        <!-- 6. Alpha Hisuian Goodra -->
+        <div class="pokemon-card theme-amber">
+          <div class="pokemon-header">
+            <div class="poke-sprite-box">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10242.png" alt="Hisuian Goodra" class="fit-contain" />
+            </div>
+            <div class="pokemon-info">
+              <span class="poke-name">Eclipse</span>
+              <span class="poke-attribute">Hisuian Goodra</span>
+            </div>
+          </div>
+          <div class="game-tags">
+            <span class="game-tag">Steel / Dragon</span>
+            <span class="game-tag">Alpha</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Additional Pokémon Roster Section Below -->
+    <section class="roster-section">
+      <h2 class="roster-title">Other Roster Pokémon</h2>
+      <div class="roster-grid">
+        
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10034.png" alt="Alpha Mega Lucario" />
+          </div>
+          <span class="roster-poke-nickname">Anput</span>
+          <span class="roster-poke-species">Alpha Mega Lucario</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/447.png" alt="Riolu" />
+          </div>
+          <span class="roster-poke-nickname">Kebehut</span>
+          <span class="roster-poke-species">Riolu</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/197.png" alt="Shiny Umbreon" />
+          </div>
+          <span class="roster-poke-nickname">Selene</span>
+          <span class="roster-poke-species">Shiny Umbreon</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10033.png" alt="Mega Blaziken" />
+          </div>
+          <span class="roster-poke-nickname">Montu</span>
+          <span class="roster-poke-species">Mega Blaziken</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/10087.png" alt="Mega Shiny Camerupt" />
+          </div>
+          <span class="roster-poke-nickname">Daedalus</span>
+          <span class="roster-poke-species">Mega Shiny Camerupt</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/169.png" alt="Crobat" />
+          </div>
+          <span class="roster-poke-nickname">Procne</span>
+          <span class="roster-poke-species">Crobat</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/10051.png" alt="Shiny Mega Gardevoir" />
+          </div>
+          <span class="roster-poke-nickname">Meret</span>
+          <span class="roster-poke-species">Shiny Mega Gardevoir</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/10068.png" alt="Shiny Mega Gallade" />
+          </div>
+          <span class="roster-poke-nickname">Wenenu</span>
+          <span class="roster-poke-species">Shiny Mega Gallade</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10052.png" alt="Mega Mawile" />
+          </div>
+          <span class="roster-poke-nickname">Ammit</span>
+          <span class="roster-poke-species">Mega Mawile</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10057.png" alt="Mega Absol" />
+          </div>
+          <span class="roster-poke-nickname">Shed</span>
+          <span class="roster-poke-species">Mega Absol</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Regular Cosplay Pikachu" />
+          </div>
+          <span class="roster-poke-nickname">Abu</span>
+          <span class="roster-poke-species">Regular Cosplay Pikachu</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10078.png" alt="Primal Groudon" />
+          </div>
+          <span class="roster-poke-nickname">Venus</span>
+          <span class="roster-poke-species">Primal Groudon</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10077.png" alt="Primal Kyogre" />
+          </div>
+          <span class="roster-poke-nickname">Mercury</span>
+          <span class="roster-poke-species">Primal Kyogre</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/10079.png" alt="Shiny Mega Rayquaza" />
+          </div>
+          <span class="roster-poke-nickname">Jupiter</span>
+          <span class="roster-poke-species">Shiny Mega Rayquaza</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/386.png" alt="Deoxys" />
+          </div>
+          <span class="roster-poke-nickname">Mars</span>
+          <span class="roster-poke-species">Deoxys</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/385.png" alt="Jirachi" />
+          </div>
+          <span class="roster-poke-nickname">Tyche</span>
+          <span class="roster-poke-species">Jirachi</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/157.png" alt="Typhlosion" />
+          </div>
+          <span class="roster-poke-nickname">Khepri</span>
+          <span class="roster-poke-species">Typhlosion</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10072.png" alt="Mega Steelix" />
+          </div>
+          <span class="roster-poke-nickname">Denwen</span>
+          <span class="roster-poke-species">Mega Steelix</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10049.png" alt="Mega Tyranitar" />
+          </div>
+          <span class="roster-poke-nickname">Tatenen</span>
+          <span class="roster-poke-species">Mega Tyranitar</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/464.png" alt="Rhyperior" />
+          </div>
+          <span class="roster-poke-nickname">Worset</span>
+          <span class="roster-poke-species">Rhyperior</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/34.png" alt="Shiny Nidoking" />
+          </div>
+          <span class="roster-poke-nickname">Pharoah</span>
+          <span class="roster-poke-species">Shiny Nidoking</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/392.png" alt="Infernape" />
+          </div>
+          <span class="roster-poke-nickname">Anuke</span>
+          <span class="roster-poke-species">Infernape</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/472.png" alt="Shiny Gliscor" />
+          </div>
+          <span class="roster-poke-nickname">Charon</span>
+          <span class="roster-poke-species">Shiny Gliscor</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10058.png" alt="Mega Garchomp" />
+          </div>
+          <span class="roster-poke-nickname">Haures</span>
+          <span class="roster-poke-species">Mega Garchomp</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/478.png" alt="Frosslass" />
+          </div>
+          <span class="roster-poke-nickname">Anhefta</span>
+          <span class="roster-poke-species">Frosslass</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/479.png" alt="Rotom" />
+          </div>
+          <span class="roster-poke-nickname">Semi</span>
+          <span class="roster-poke-species">Rotom</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/497.png" alt="Serperior" />
+          </div>
+          <span class="roster-poke-nickname">Wepset</span>
+          <span class="roster-poke-species">Serperior</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/625.png" alt="Shiny Bisharp" />
+          </div>
+          <span class="roster-poke-nickname">Menhit</span>
+          <span class="roster-poke-species">Shiny Bisharp</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/635.png" alt="Hydreigon" />
+          </div>
+          <span class="roster-poke-nickname">Talaata</span>
+          <span class="roster-poke-species">Hydreigon</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/530.png" alt="Excadrill" />
+          </div>
+          <span class="roster-poke-nickname">Maat</span>
+          <span class="roster-poke-species">Excadrill</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/571.png" alt="Shiny Zoroark" />
+          </div>
+          <span class="roster-poke-nickname">Kauket</span>
+          <span class="roster-poke-species">Shiny Zoroark</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/637.png" alt="Shiny Volcarona" />
+          </div>
+          <span class="roster-poke-nickname">Hathor</span>
+          <span class="roster-poke-species">Shiny Volcarona</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/549.png" alt="Shiny Liligant" />
+          </div>
+          <span class="roster-poke-nickname">Beset</span>
+          <span class="roster-poke-species">Shiny Liligant</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10033.png" alt="Mega Venusaur" />
+          </div>
+          <span class="roster-poke-nickname">Nefertum</span>
+          <span class="roster-poke-species">Mega Venusaur</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/675.png" alt="Pangoro" />
+          </div>
+          <span class="roster-poke-nickname">Yang</span>
+          <span class="roster-poke-species">Pangoro</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/663.png" alt="Talonflame" />
+          </div>
+          <span class="roster-poke-nickname">Horus</span>
+          <span class="roster-poke-species">Talonflame</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/709.png" alt="Shiny Trevenant" />
+          </div>
+          <span class="roster-poke-nickname">Lost Kin</span>
+          <span class="roster-poke-species">Shiny Trevenant</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/699.png" alt="Aurorus" />
+          </div>
+          <span class="roster-poke-nickname">Isabet</span>
+          <span class="roster-poke-species">Aurorus</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/671.png" alt="Shiny Blue Florges" />
+          </div>
+          <span class="roster-poke-nickname">Thermuthis</span>
+          <span class="roster-poke-species">Shiny Blue Florges</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/770.png" alt="Shiny Palossand" />
+          </div>
+          <span class="roster-poke-nickname">Set</span>
+          <span class="roster-poke-species">Shiny Palossand</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10109.png" alt="Alolan Ninetails" />
+          </div>
+          <span class="roster-poke-nickname">Besna</span>
+          <span class="roster-poke-species">Alolan Ninetails</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/754.png" alt="Shiny Lurantis" />
+          </div>
+          <span class="roster-poke-nickname">Nepit</span>
+          <span class="roster-poke-species">Shiny Lurantis</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/750.png" alt="Mudsdale" />
+          </div>
+          <span class="roster-poke-nickname">Trojan</span>
+          <span class="roster-poke-species">Mudsdale</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/10212.png" alt="Shiny Gigantamax Corviknight" />
+          </div>
+          <span class="roster-poke-nickname">Arthur</span>
+          <span class="roster-poke-species">Shiny Gigantamax Corviknight</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10184.png" alt="Low Key Toxtricity" />
+          </div>
+          <span class="roster-poke-nickname">Jonny</span>
+          <span class="roster-poke-species">Low Key Toxtricity</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/853.png" alt="Grapploct" />
+          </div>
+          <span class="roster-poke-nickname">Davy Jones</span>
+          <span class="roster-poke-species">Grapploct</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/870.png" alt="Shiny Falinks" />
+          </div>
+          <span class="roster-poke-nickname">Bringar</span>
+          <span class="roster-poke-species">Shiny Falinks</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/892.png" alt="Dark Urshifu" />
+          </div>
+          <span class="roster-poke-nickname">Sohei</span>
+          <span class="roster-poke-species">Dark Urshifu</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/773.png" alt="Silvally" />
+          </div>
+          <span class="roster-poke-nickname">Sekhmet</span>
+          <span class="roster-poke-species">Silvally</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10240.png" alt="Hisuian Typhlosion" />
+          </div>
+          <span class="roster-poke-nickname">Ulysses</span>
+          <span class="roster-poke-species">Hisuian Typhlosion</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/389.png" alt="Alpha Torterra" />
+          </div>
+          <span class="roster-poke-nickname">Cybelle</span>
+          <span class="roster-poke-species">Alpha Torterra</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/904.png" alt="Overqwil" />
+          </div>
+          <span class="roster-poke-nickname">Catastrophe</span>
+          <span class="roster-poke-species">Overqwil</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/405.png" alt="Alpha Luxray" />
+          </div>
+          <span class="roster-poke-nickname">Thor</span>
+          <span class="roster-poke-species">Alpha Luxray</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/903.png" alt="Shiny Sneasler" />
+          </div>
+          <span class="roster-poke-nickname">Zagan</span>
+          <span class="roster-poke-species">Shiny Sneasler</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10243.png" alt="Hisuian Liligant" />
+          </div>
+          <span class="roster-poke-nickname">Astarte</span>
+          <span class="roster-poke-species">Hisuian Liligant</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/474.png" alt="Alpha Porygon-Z" />
+          </div>
+          <span class="roster-poke-nickname">Apep</span>
+          <span class="roster-poke-species">Alpha Porygon-Z</span>
+        </div>
+
+        <div class="roster-square-card">
+          <div class="roster-sprite-box">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/645.png" alt="Landorus" />
+          </div>
+          <span class="roster-poke-nickname">Judgement</span>
+          <span class="roster-poke-species">Landorus</span>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      <p>© <span id="year"></span> Grewdon_GG21 • Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile Sidebar Toggles
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    
+    function toggleSidebar(open) {
+      if (open) {
+        sidebar.classList.add('open');
+        sidebarOverlay.classList.add('open');
+      } else {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('open');
+      }
+    }
+
+    document.getElementById('openSidebar').addEventListener('click', () => toggleSidebar(true));
+    document.getElementById('closeSidebar').addEventListener('click', () => toggleSidebar(false));
+    sidebarOverlay.addEventListener('click', () => toggleSidebar(false));
+
+    // Interactive Canvas Particles
+    const canvas = document.getElementById('particles-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const particles = [];
+      const particleCount = Math.min(Math.floor(width / 25), 45);
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          size: Math.random() * 2 + 1,
+          alpha: Math.random() * 0.5 + 0.2
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        const computedStyle = getComputedStyle(document.body);
+        const accentColor = computedStyle.getPropertyValue('--accent-primary').trim() || '#00F2FE';
+
+        for (let i = 0; i < particles.length; i++) {
+          let p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = accentColor;
+          ctx.globalAlpha = p.alpha;
+          ctx.fill();
+
+          for (let j = i + 1; j < particles.length; j++) {
+            let p2 = particles[j];
+            let dx = p.x - p2.x;
+            let dy = p.y - p2.y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 120) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = accentColor;
+              ctx.globalAlpha = (1 - dist / 120) * 0.15;
+              ctx.stroke();
+            }
+          }
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+  </script>
+</body>
+</html>
